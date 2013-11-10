@@ -14,6 +14,7 @@ from django.db.models.expressions import F
 from django.contrib.sites.models import get_current_site
 from django.views.generic.base import View
 from django.core.urlresolvers import reverse
+from django.db.models.query_utils import Q
 
 from core.views import BaseView, AccessAuthMixin
 from common.paginator import Paginator
@@ -33,7 +34,7 @@ class BlogBase(BaseView):
         context = {
             'categories': Category.objects.all(),
             'tags': Tag.objects.all().order_by('?')[:self.tags_shown_count],
-            'pblogs': Blog.objects.all().order_by('-click_count')[:8],
+            'pblogs': Blog.objects.all().order_by('-click_count', '-created')[:8],
             'links': Link.objects.all()
         }
         context.update(extra_context)
@@ -69,7 +70,10 @@ class GetHome(BlogBase):
             blogs = tag.blog_set.all()
             filter = tag.name
         elif q:
-            blogs = Blog.objects.filter(title__icontains=q)
+            blogs = Blog.objects.filter(Q(title__icontains=q) |
+                                        Q(tags__name__icontains=q) |
+                                        Q(content__icontains=q) |
+                                        Q(cate__name__icontains=q)).distinct()
             filter = q
         else:
             blogs = Blog.objects.all()

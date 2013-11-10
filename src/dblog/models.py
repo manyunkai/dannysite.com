@@ -39,7 +39,7 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
-        ordering = ['-create_time']
+        ordering = ['-created']
 
 
 class Tag(BaseModel):

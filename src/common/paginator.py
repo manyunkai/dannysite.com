@@ -67,6 +67,7 @@ class Paginator(object):
 
         max_page = int(math.ceil(float(total) / page_size)) - 1
         self.max_page = 0 if max_page < 0 else max_page
+        print 'max_page:', max_page
 
     def get_page(self, request):
         try:
@@ -86,12 +87,12 @@ class Paginator(object):
         offset = self.total - prev_count
         offset = 0 if offset < 0 else offset
 
-        original = page
         page -= 1
         if page < 0:
             page = 0
         elif page > self.max_page:
             page = self.max_page
+        original = page + 1
 
         section = page / self.section_page_num
         section = 0 if section < 0 else section
