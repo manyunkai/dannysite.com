@@ -1,0 +1,157 @@
+{% extends "base/theme_base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block nav_5 %}focus{% endblock %}
+
+{% block title %}关于- DannySite{% endblock %}
+
+{% block extra_link %}
+	<link href="{% static 'site/v3/css/about.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block extra_js %}
+	<script src="{% static 'site/v3/js/jquery-1.8.2.min.js' %}"></script>
+	<script src="{% static 'site/v3/js/placeholder.js' %}"></script>
+	<script src="{% static 'site/v3/js/captcha.js' %}"></script>
+	<script src="{% static 'site/v3/js/feedback.js' %}"></script>
+	<script>
+		$(document).ready(function(){
+			$.fn.placeholder();
+		})
+	</script>
+	{% block inner_extra_js %}{% endblock %}
+{% endblock %}
+
+{% block meta_desc %}DannySite关于与意见反馈。DannySite是Danny的个人网站，采用的Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}
+{% block meta_keywords %}关于,意见反馈,个人网站,Python,Django{% endblock %}
+
+{% block container %}
+	<div class="normBox" id="about_by_cate">
+    	<div class="varea">
+            <div class="title pt16 fs30 textCenter">
+                <span>关于一切的一切</span>
+            </div>
+            <div class="aboutBox pt26">
+            	<div class="themeBox enFont">
+                	<div class="textCenter themeTitle" id="about_me">
+                    	<span class="commTTxt fs36">ABOUT</span>
+                    	<span class="themeTxt fs18">ME</span>
+                    </div>
+                    <div class="fltrt aboutTxt bg1">
+                        <span>IT男一枚，喜欢并主要钻研Python和网站设计与开发。</span>
+                        <span>折腾乃我的一大爱好，喜欢做一些自己的小作品，虽然并不完美，但只要达到对知识的巩固和探索的目的即可。当然，这也能作为个人的一些小展示，何乐而不为呢^_^。</span>
+                    </div>
+                    <div class="clearfloat"></div>
+                </div>
+            </div>
+            <div class="aboutBox pt42">
+            	<div class="themeBox enFont">
+                	<div class="aboutTxt bg1">
+                        <span>很高兴我的 DANNYSITE 已经更新到了第三个版本。从设计到编码，一切都由我自主完成，还是不乏有一些成就感。</span>
+                        <span>作为 Python 爱好者，后端固然采用的Python Django框架开发。</span>
+                        <span>俗话说好记性不如烂笔头，因此博客系统依然是这个网站的重头戏。将我的学习笔记、心得以及各种点滴等记录在此，不仅是个好习惯，还可以很好的与来自全世界的朋友分享；</span>
+                        <span>当然其他还有一些小功能，主要是基于兴趣开发的。</span>
+                        <span>注：建议采用IE8及以上浏览器浏览。</span>
+                    </div>
+                    <div class="fltrt textCenter themeTitle" id="about_dannysite">
+                        <span class="commTTxt fs36">ABOUT</span>
+                        <span class="themeTxt fs18">DANNYSITE</span>
+                    </div>
+               	 	<div class="clearfloat"></div>
+                </div>
+            </div>
+            <div class="aboutBox pt42">
+            	<div class="themeBox enFont">
+                    <div class="textCenter themeTitle" id="about_copyright">
+                        <span class="commTTxt fs36">ABOUT</span>
+                        <span class="themeTxt fs18">COPYRIGHT</span>
+                    </div>
+                    <div class="fltrt aboutTxt bg1">
+                        <span>博客中大多为我的个人原创，当然也不乏转载的文章，这些我会在博客开始处特别说明。您可以自由地转载我的博客，但请标明出处。</span>
+                        <span>站点中收集的很多图片均来自互联网，其所有版权归原作者所有；并且其中的所有内容仅代表我个人的一些兴趣、喜好与立场，如果您也喜欢，我很高兴能和您一同分享；</span>
+                        <span>如果您是文章或图片的作者并觉得有不妥之处，请随时与我联系，我会及时加注版权信息或在您不允许本站使用您的作品的情况下及时删除相关内容。</span>
+                    </div>
+                    <div class="clearfloat"></div>
+                </div>
+            </div>
+        </div>
+	<!-- end about_by_cate --></div>
+	<a id="contact"></a>
+    <div class="normBox" id="contact">
+    	<div class="varea">
+            <div class="title fs30 textCenter">
+                <span>与我联系</span>
+            </div>
+            <div class="contactBox pt26">
+            	<div class="contactNotice bg2 fs16 textCenter">
+                	<span>如果您对我的个人网站有任何意见和建议，或者交个朋友一起交流兴趣爱好，也或是因为一些其它的原因，都可以随时与我联系。</span>
+                </div>
+                <div class="contactForm bg1">
+                    <div class="fltlft bg1 pt34" id="im_tools">
+                        <table>
+                            <tr>
+                                <td><img src="{% static 'site/v3/img/qq_logo.png' %}"></td>
+                                <td><a href="http://wpa.qq.com/msgrd?V=1&Uin=525493922&Site=www.dannysite.com&Menu=yes">525493922</a></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'site/v3/img/weibo_logo.png' %}"></td>
+                                <td><a href="http://weibo.com/danny0616/">Ex.Sides</a></td>
+                            </tr>
+                            <tr>
+                                <td><img src="{% static 'site/v3/img/mail_logo.png' %}"></td>
+                                <td><a href="mailto:manyunkai@hotmail.com">manyunkai@hotmail.com</a></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="fltlft bg2" id="cutting_line"></div>
+                    <div class="fltlft bg1 pt34" id="contact_form_box">
+                    	<form action="{% url 'feedback' %}" method="post" id="contact_form">
+                    		{% csrf_token %}
+                            <div class="inputBox fltlft">
+                            	{{ form.name|attr:"class:xnorminput"|attr:"placeholder:您的称呼" }}
+                            </div>
+                            <div class="inputBox fltlft" id="captcha_desc_box">
+                                <span id="captcha_desc">验证码：</span>
+                            </div>
+                            <div class="clearfloat"></div>
+                            <div class="inputBox fltlft">
+                            	{{ form.email|attr:"class:xnorminput"|attr:"placeholder:您的邮箱" }}
+                            </div>
+                            <div class="inputBox fltlft">
+                            	{{ form.captcha }}
+                            </div>
+                            <div class="clearfloat"></div>
+                            <div class="textareaBox">
+                            	{{ form.content|attr:"class:xnormtextarea"|attr:"placeholder:意见与反馈"|attr:"rows:5" }}
+                            </div>
+                            <div class="submitBox textRight" id="contact_submit_box">
+                            	<button class="normBtn" type="submit" id="contace_form_submit">提交</button>
+                            </div>
+                        </form>
+                    </div>
+                	<div class="clearfloat"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block popup %}
+	<div class="popupBox" style="display: none;">
+		<div class="popupLayout"></div>
+		<div class="errorMessage">
+			<div class="mainBox">
+		        <div class="errorTitle fs24">
+		            <span id="error_title"></span>
+		  		</div>
+		        <div class="errorDetail fs16">
+		        	<span id="error_msg"></span>
+		        </div>
+		        <div class="btnBox textRight">
+		        	<button class="writeBtn" id="error_confirm">确定</button>
+		        </div>
+		    </div>
+		</div>
+	</div>
+{% endblock %}

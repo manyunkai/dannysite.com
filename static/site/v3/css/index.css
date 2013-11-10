@@ -1,0 +1,95 @@
+@charset "utf-8";
+
+#my_focus {
+	border-top-width: 2px;
+	border-bottom-width: 2px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #eeeeee;
+	border-bottom-color: #eeeeee;
+}
+#cover img {
+	display: block;
+}
+#my_focus_title {
+	text-align: right;
+	width: 100%;
+	padding-top: 8px;
+}
+#my_focus_weibo {
+	text-align: right;
+}
+#my_focus_desc {
+	padding-top: 32px;
+	line-height: 26px;
+	font-size: 16px;
+	height: 155px;
+	overflow: hidden;
+}
+#my_focus_txt {
+	width: 654px;
+
+}
+#blog_nav_box {
+	font-size: 16px;
+	background-color: #fafafa;
+	margin-top: 6px;
+}
+#photo_box img {
+	display: block;
+	float: left;
+}
+#photo_box #photo_right img {
+	float: left;
+}
+#photo_box #photo_desc_layout {
+	filter: alpha(opacity=30);
+	-moz-opacity: 0.3;
+	opacity: 0.3;
+	position: absolute;
+	background-color: #000;
+	_background-color: #FFF;
+	bottom: 0px;
+	width: 100%;
+	height: 132px;
+	color: #FFF;
+	padding: 10px 0px;
+}
+#photo_box #photo_nav_layout {
+	position: absolute;
+	bottom: 0px;
+	width: 410px;
+	height: 30px;
+	color: #FFF;
+	text-align: right;
+	padding-top: 10px;
+	padding-right: 20px;
+	padding-bottom: 10px;
+	padding-left: 20px;
+}
+#photo_box #photo_nav_layout a  {
+	color: #FFF;
+	text-decoration: none;
+}
+#photo_box #photo_nav_layout a:hover {
+	color: #CCC;
+	text-decoration: none;
+}
+#photo_box #photo_desc_txt {
+	position: absolute;
+	bottom: 0px;
+	width: 480px;
+	height: 132px;
+	color: #FFF;
+	padding: 10px;
+}
+#blog_btn {
+	font-size: 16px;
+	padding-bottom: 13px;
+	background-color: #fafafa;
+	display: block;
+	padding-top: 13px;
+}
+#blog_btn:hover {
+	background-color: #eeeeee;
+}

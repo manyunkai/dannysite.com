@@ -1,0 +1,17 @@
+{% extends "base/theme_base.html" %}
+{% load staticfiles %}
+
+{% block extra_js %}
+	<script src="{% static 'site/v3/js/jquery-1.8.2.min.js' %}"></script>
+	<script src="{% static 'site/v3/js/placeholder.js' %}"></script>
+	<script>
+		$(document).ready(function(){
+			$.fn.placeholder();
+		})
+	</script>
+	{% block inner_extra_js %}{% endblock %}
+{% endblock %}
+
+{% block popup %}
+	{% include 'base/popup.html' %}
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "dblog/base.html" %}
+{% load staticfiles %}
+
+{% block title %}{% if filter %}与 {{ filter}} 相关的{% endif %}博客 - DannySite{% endblock %}
+
+{% block meta_desc %}DannySite博客，记录学习笔记、心得以及生活点滴，技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}
+
+{% block container %}
+	<div class="normBox">
+    	{% include "dblog/includes/sidebar.html" %}
+    	{% for blog in blogs %}
+    		{% include "dblog/includes/blogbox.html" %}
+    	{% endfor %}
+    	{% if page_instance.has_other_pages %}
+ 			{% include "dblog/includes/paginator.html" %}
+ 		{% endif %}
+        <div class="clearfloat"></div> 
+	<!-- end blog_box --></div>
+    <div class="clearfloat"></div>
+{% endblock %}

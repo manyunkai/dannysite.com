@@ -1,0 +1,98 @@
+{% extends "base/theme_base.html" %}
+{% load staticfiles %}
+
+{% block nav_1 %}focus{% endblock %}
+
+{% block extra_link %}
+	<link href="{% static 'site/v3/css/index.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block container %}
+  	<div class="normBox textCenter">
+    	<span class="fs36 block">欢迎您的来访</span>
+    	<span class="fs28 block pt22 enFont">Welcome To DannySite!</span>
+  	<!-- end .normBox --></div>
+  	
+  	{% if focus %}
+	    <div class="fullBox" id="my_focus">
+	    	<div class="varea bg1">
+	        	<div class="fltlft" id="cover">
+	            	<img src="{{ focus.image.url }}" width="280" height="280">
+	            </div>
+	            <div class="fltlft" id="my_focus_txt">
+	            	<div class="fs24" id="my_focus_title">
+	                	<span>{{ focus.title }}</span>
+	                </div>
+	                <div id="my_focus_desc">
+	                	{{ focus.description|linebreaks }}
+	                </div>
+	            </div>
+	            <div class="clearfloat"></div>
+	        </div>
+	    <!-- end my_focus --></div>
+    {% endif %}
+	<div class="normBox" id="blog_box">
+    	<div class="listBox fltlft">
+        	<ul>
+            	<li class="listTitle textCenter">分类排行</li>
+            	{% for cate in hottest_cates %}
+                	<a href="{% url 'blog_home' %}?cat={{ cate.id }}"><li class="listItem textCenter">{{ cate.name }}（{{ cate.count }}）</li></a>
+            	{% endfor %}
+            </ul>
+        </div>
+    	<div class="listBox fltlft ml57">
+        	<ul>
+            	<li class="listTitle textCenter">最近更新</li>
+            	{% for blog in latest_blogs %}
+                	<a href="{% url 'blog_detail' blog.id %}" title="{{ blog.title }}"><li class="listItem textCenter">{{ blog.title|truncatechars:20 }}</li></a>
+            	{% endfor %}
+            </ul>
+		</div>
+    	<div class="listBox fltlft ml57">
+       	  <ul>
+           	  <li class="listTitle textCenter">热门排行</li>
+           	  {% for blog in hottest_blogs %}
+                  <a href="{% url 'blog_detail' blog.id %}" title="{{ blog.title }}"><li class="listItem textCenter">{{ blog.title|truncatechars:20 }}</li></a>
+           	  {% endfor %}
+          </ul>
+      	</div>
+      	<div class="clearfloat"></div>
+      	<div style="height:0px">&nbsp;</div>
+		<div class="textCenter" id="blog_nav_box">
+			<a class="noDecorA" href="{% url 'blog_home' %}" id="blog_btn">进入博客主页</a>
+		</div>
+	<!-- end blog_box --></div>
+	{% if photos %}
+	    <div class="normBox" id="photo_box">
+	    	<div class="varea bg1">
+	        	<div class="fltlft posRela">
+	            	<img src="{{ MEDIA_URL }}images/photos/s500/{{ photos.0 }}" width="500" height="440">
+	            	<!--[if IE 7]>
+	        			<div class="clearfloat"></div>
+	        		<![endif]-->
+	        		<div id="photo_desc_layout"></div>
+	                <div id="photo_desc_txt">
+	                    <span class="fs18 enFont block" id="photo_title">{{ latest_photo.title }}</span>
+	                    <span class="fs14 enFont block pt8" id="photo_author">{{ latest_photo.author }}</span>
+	                    <span class="fs14 enFont block pt26" id="photo_desc">{{ latest_photo.description }}</span>
+	                </div>
+	            </div>
+	            <div class="fltlf posRelat">
+	            	<img src="{{ MEDIA_URL }}images/photos/s200c/{{ photos.3 }}" width="200" height="200">
+	                <img src="{{ MEDIA_URL }}images/photos/s250/{{ photos.2 }}" width="250" height="200">
+	            </div>
+	            <div class="fltlft posRela">
+	           	  	<img src="{{ MEDIA_URL }}images/photos/s450/{{ photos.1 }}" width="450" height="240">
+	           	  	<!--[if IE 7]>
+	           	  		<div class="clearfloat"></div>
+	           	  	<![endif]-->
+	                <div id="photo_nav_layout">
+	                	<a href="{% url 'photo_home' %}">浏览所有图片 >></a>
+	                </div>
+	            </div>
+	            <div class="clearfloat">
+	            </div>
+	        </div>
+	    <!-- end photo_box --></div>
+	{% endif %}
+{% endblock %}

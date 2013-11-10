@@ -1,0 +1,107 @@
+@charset "utf-8";
+.themeBox {
+	width: 100%;
+	padding: 0;
+	background-color: #1d8dcd;
+	color: #FFF;
+	position: relative;
+}
+.themeTitle {
+	width: 189px;
+	position: absolute;
+	top: 50%;
+	margin-top: -32px;
+	*display: expression(style.display='block', 0);
+}
+.commTTxt {
+	font-family: Arial, Tahoma, Helvetica, Simsun, STHeiti;
+	height: 42px;
+	color: #FFFFFF;
+}
+.themeTxt {
+	font-family: Arial, Tahoma, Helvetica, Simsun, STHeiti;
+	color: #FFF;
+	height: 22px;
+}
+.aboutTxt {
+	width: 761px;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	font-size: 16px;
+	*margin-bottom: -1px;
+}
+.aboutTxt span {
+	font-family: 'Microsoft Yahei', Tahoma, Arial, Helvetica, Simsun, STHeiti;
+	padding-top: 18px;
+	padding-bottom: 18px;
+	padding-right: 30px;
+	padding-left: 30px;
+	font-size: 16px;
+	color: #5e5e5e;
+}
+
+.aboutBox span {
+	display: block;
+}
+#about_dannysite {
+	left: 761px;
+}
+
+.contactNotice {
+	padding-top: 18px;
+	padding-bottom: 18px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+#contact_form_box {
+	font-size: 16px;
+	width: 598px;
+}
+#contact_form_box .inputBox {
+	height: 48px;
+	padding-left: 38px;
+	padding-bottom: 18px;
+	position: relative;
+}
+#contact_form_box .submitBox {
+	padding-bottom: 25px;
+}
+#contact_form_box .textareaBox {
+	padding-left: 38px;
+	padding-bottom: 18px;
+	position: relative;
+}
+#contact_form_box #captcha_desc_box {
+	height: 25px;
+	width: 100px;
+}
+
+#contact_form_box .inputBox #captcha_desc {
+	position: absolute;
+	bottom: 0px;
+}
+#contact_form_box .xsmallinput {
+	*width: 119px;
+}
+#cutting_line {
+	height: 310px;
+	width: 2px;
+	margin-top: 26px;
+}
+#im_tools {
+	padding-left: 20px;
+	padding-right: 20px;
+}
+#im_tools table tr{
+	height: 60px;
+	vertical-align: middle;
+
+}
+#im_tools table tr a {
+	padding-left: 5px;
+	color: #1d8dcd;
+	text-decoration: none;
+}
+#im_tools table tr a:hover {
+	color: #f39800;
+}

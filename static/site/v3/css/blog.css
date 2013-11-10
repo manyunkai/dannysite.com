@@ -1,0 +1,163 @@
+@charset "utf-8";
+
+.blogBox {
+	border-top-width: 3px;
+	border-top-style: solid;
+	border-top-color: #1d8dcd;
+	width: 633px;
+	padding-bottom: 35px;
+}
+.topBox {
+	background-color: #1d8dcd;
+	position: relative;
+	*position: static;
+}
+
+.timeBox {
+	width: 75px;
+	color: #FFF;
+	position: absolute;
+	*position: static;
+	top: 50%;
+	margin-top: -36px;
+	*margin-top: 0px;
+}
+
+.timeBox #time_day {
+	display: block;
+	height: 38px;
+}
+.timeBox #time_month {
+	display: block;
+	height: 30px;
+}
+.infoBox {
+	width: 558px;
+}
+.infoBox span {
+	display: block;
+}
+.infoBox #blog_title {
+	padding-top: 4px;
+	padding-bottom: 9px;
+	padding-left: 10px;
+}
+.infoBox #blog_ct {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 100%;
+}
+.infoBox #blog_ct #blog_cate {
+	padding-right: 12px;
+	padding-left: 20px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #a0a0a0;
+}
+.infoBox #blog_ct #blog_tags {
+	padding-left: 12px;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #a0a0a0;
+}
+.infoBox #blog_ct #blog_tags a {
+	padding-right: 13px;
+}
+.contentBox {
+	font-size: 14px !important;
+	font-family: 'Microsoft Yahei', Tahoma, Arial, Helvetica, Simsun, STHeiti !important;
+	padding: 10px 0px;
+	word-break: break-all;
+}
+.contentBox a {
+	color: #1d8dcd !important;
+	text-decoration: none !important;
+}
+.contentBox a:hover {
+	color: #f39800 !important;
+}
+.sidebar {
+	width: 278px;
+}
+.searchBox {
+	position: relative;
+}
+.searchBox #search {
+	padding-right: 42px;
+	width: 222px;
+}
+
+
+.searchBox #search_icon {
+	z-index: 100;
+	background-image: url('/static/site/v3/img/s_icon.png');
+	width: 24px;
+	height: 28px;
+	position: absolute;
+	top: 50%;
+	left: 244px;
+	cursor: pointer;
+	opacity: 0.7;
+	margin-top: -14px;
+}
+.searchBox #search_icon:hover {
+	opacity: 1.0;
+}
+#blog_paginator {
+	width: 633px;
+}
+.cmtBox {
+	width: 633px;
+}
+.cmtBox .comment {
+	margin-top: 15px;
+}
+.cmtBox .ctavatar {
+	display: block;
+	padding: 2px;
+}
+.cmtBox .cmtInfo {
+	line-height: 65px;
+	padding-left: 10px;
+
+}
+.cmtBox .cmtContent {
+	padding: 24px 23px;
+}
+.cmtBox .cmtContent p{
+	padding: 0;
+	margin: 0;
+}
+.cmtBox .replyContent {
+	padding: 24px 23px 23px 23px;
+	width: 520px;
+}
+.cmtInputBox {
+	width: 633px;
+	margin-top: 35px;
+}
+.cmtInputBox .cmtForm {
+	width: 611px;
+	padding: 11px 11px;
+	margin-top: 15px;
+}
+.cmtInputBox .cmtForm .inputBox {
+	height: 48px;
+	padding-bottom: 18px;
+	position: relative;
+}
+.cmtInputBox .cmtForm .submitBox{
+	padding: 15px 0px 0px 0px;
+	height: auto;
+}
+.cmtInputBox .cmtForm .inputBox #captcha_desc {
+	line-height: 70px;
+}
+.cmtInputBox .cmtForm .avatarBox {
+	margin-left: 89px;
+	*margin-left: 75px;
+}
+.rssBox a, .rssBox img {
+	vertical-align: middle;
+	padding: 10px 8px;
+}

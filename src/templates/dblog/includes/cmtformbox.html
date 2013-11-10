@@ -1,0 +1,42 @@
+{% load widget_tweaks %}
+
+<div class="cmtInputBox fltlft">
+	<div id="cmtTitle">
+    	<span class="fs24">您来留言：</span>
+    </div>
+    <div class="cmtForm bg1 fltlft">
+        <div class="bg2" id="cutting_line"></div>
+        <div class="bg1" id="contact_form_box">
+            <form action="{% url 'blog_comment' blog.id %}" method="post" id="comment_form">
+            	{% csrf_token %}
+                <div class="inputBox fltlft">
+                	{{ form.user_name|attr:"class:xnorminput"|attr:"placeholder:您的称呼" }}
+                </div>
+                <div class="inputBox fltrt fs14" id="info">
+                </div>
+                <div class="clearfloat"></div>
+                <div class="inputBox fltlft">
+                	{{ form.user_email|attr:"class:xnorminput"|attr:"placeholder:您的邮箱" }}
+                </div>
+                <div class="inputBox avatarBox fltlft">
+                    <span id="captcha_desc">验证码：</span>
+                </div>
+                <div class="clearfloat"></div>
+                <div class="inputBox fltlft">
+                	{{ form.user_url|attr:"class:xnorminput"|attr:"placeholder:您的个人网址" }}
+                </div>
+                <div class="inputBox avatarBox fltlft">
+                	{{ form.captcha }}
+                </div>
+                <div class="clearfloat"></div>
+                <div class="textAreaBox">
+                	{{ form.comment|attr:"class:xlargetextarea"|attr:"placeholder:期待您的留言"|attr:"rows:5" }}
+                </div>
+                <div class="submitBox textRight" id="contact_submit_box">
+                	{{ form.related }}
+                	<button class="normBtn" type="submit" id="comment_form_submit">提交</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

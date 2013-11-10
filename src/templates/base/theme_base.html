@@ -1,0 +1,64 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{% block title %}欢迎来访DannySite{% endblock %}</title>
+<meta name="description" content="{% block meta_desc %}Danny的个人网站，采用的Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}">
+<meta name="keywords" content="{% block meta_keywords %}编程,Python,Django,HTML,CSS,JavaScript,Redis,Linux,PHP,个人网站{% endblock %}">
+{% block extra_metas %}
+{% endblock %}
+<link href="{% static 'site/v3/css/base.css' %}" rel="stylesheet" type="text/css">
+
+{% block extra_link %}{% endblock %}
+
+{% block extra_js %}{% endblock %}
+</head>
+
+<body>
+
+<div class="header bg1">
+	<div class="varea">
+    	<div class="logo fltlft">
+    		<a href="{% url 'home' %}"><img src="{% static 'site/v3/img/LOGO.png' %}" alt="Logo for DannySite" width="120" height="19"></a>
+    	</div>
+      	<div class="nav fltrt">
+        	<a class="nav_btn {% block nav_1 %}{% endblock %}" href="{% url 'home' %}">首页</a>
+            <a class="nav_btn {% block nav_2 %}{% endblock %}" href="{% url 'blog_home' %}">博客</a>
+            <a class="nav_btn {% block nav_3 %}{% endblock %}" href="{% url 'photo_home' %}">图片</a>
+            <a class="nav_btn {% block nav_4 %}{% endblock %}" href="#">源码</a>
+            <a class="nav_btn {% block nav_5 %}{% endblock %}" href="{% url 'about' %}">关于</a>
+        </div>
+        <div class="clearfloat"></div>
+    </div>
+</div>
+
+<div class="container">
+	{% block container %}
+	{% endblock %}
+<!-- end .container --></div>
+
+<div class="footer bg1">
+	<div class="varea">
+		<div class="nav_buttom fltlft">
+			<a class="nav_btn normDecorA" href="{% url 'home' %}">返回首页</a>
+            <a class="nav_btn normDecorA" href="{% url 'about' %}#contact">与我联系</a>
+            {% if user.is_authenticated %}
+            	<a class="nav_btn normDecorA" href="{% url 'admin:index' %}">管理后台</a>
+            	<a class="nav_btn normDecorA" href="{% url 'acct_logout' %}">退出登录</a>
+            {% else %}
+	            <a class="nav_btn normDecorA" href="{% url 'acct_login' %}">管理登录</a>
+            {% endif %}
+		</div>
+        <div class="copyright enFont fltrt">
+        	<span>Designed by <b><i>Danny</i></b> | Copyright 2012 - 2014 <b><i>DannyWork</i> Project</span></b>
+        </div>
+        <div class="clearfloat">
+        </div>
+	</div>
+</div>
+
+{% block popup %}{% endblock %}
+</body>
+</html>

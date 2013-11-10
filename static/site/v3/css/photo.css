@@ -1,0 +1,67 @@
+@charset "utf-8";
+
+.themeTitle{
+	width: 950px;
+}
+.photoBoxL {
+	width: 950px;
+	position: relative;
+}
+.photoBoxM {
+	width: 600px;
+}
+.photoBoxN {
+	width: 350px;
+}
+.photoBoxS {
+	width: 300px;
+}
+.normBox img{
+	float: left;
+	display: block;
+}
+.descBoxLayout {
+	background-color: #000;
+	height: 359px;
+	width: 254px;
+	filter: alpha(opacity=30);
+	-moz-opacity: 0.3;
+	opacity: 0.3;
+	position: absolute;
+	right: 0px;
+	z-index: 10;
+}
+.descBox {
+	padding: 26px 16px;
+	height: 307px;
+	width: 222px;
+	position: absolute;
+	right: 0px;
+	z-index: 11;
+	color: #FFF;
+}
+.descBox span {
+	display: block;
+}
+.descBox .photoDesc {
+	position: absolute;
+	bottom: 26px;
+}
+.themeTitle {
+	padding-bottom: 31px;
+}
+.themeTitle span {
+	padding-right: 8px;
+}
+.getMore {
+	cursor: pointer;
+	width: 100%;
+	margin-top: 10px;
+}
+.getMore:hover {
+	background-color: #eeeeee;
+}
+.getMore span{
+	display: block;
+	padding: 10px 0px;
+}

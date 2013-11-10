@@ -1,0 +1,35 @@
+{% extends "dshare/base.html" %}
+{% load staticfiles %}
+
+{% block title %}图片 - DannySite{% endblock %}
+{% block meta_desc %}DannySite图片库，收集来自互联网的美图，在此与大家共赏。DannySite是Danny的个人网站，采用的Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}
+{% block meta_keywords %}美图,壁纸,风景,明星,生活,个人网站,图片库,分享{% endblock %}
+
+{% block inner_extra_js %}
+	<script src="{% static 'site/v3/js/photo_handler.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+  	<div class="normBox">
+  		<div class="themeTitle">
+        	<span class="fs36">图片</span>
+            <span class="fs24 enFont">Photos</span>
+        </div>
+        {% if top_photo %}
+        	<div class="photoBoxL fltlft">
+	        	<img src="{{ top_photo.image_url }}" width="950" height="359">
+	            <div class="descBoxLayout"></div>
+	            <div class="descBox">
+	            	<span class="photoTitle fs22">{{ top_photo.title }}</span>
+	                <span class="photoAuthor fs14">{{ top_photo.author }}</span>
+	                <span class="photoDesc fs14">{{ top_photo.description }}</span>
+	            </div>
+	        </div>
+        {% endif %}
+    	{{ html|safe }}
+        <div class="clearfloat"></div>
+        {% if has_next %}
+        	<div class="getMore bg1 textCenter" data-offset="{{ offset }}"><span class="fs16">查看更老的图片</span></div>
+        {% endif %}
+  	<!-- end .normBox --></div>
+{% endblock %}

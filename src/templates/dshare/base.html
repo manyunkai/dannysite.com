@@ -1,0 +1,20 @@
+{% extends "base/theme_base.html" %}
+{% load staticfiles %}
+
+{% block extra_link %}
+	<link href="{% static 'site/v3/css/photo.css' %}" rel="stylesheet" type="text/css">
+	{% block inner_extra_link %}{% endblock %}
+{% endblock %}
+
+{% block extra_js %}
+	<script src="{% static 'site/v3/js/jquery-1.8.2.min.js' %}"></script>
+	<script src="{% static 'site/v3/js/jquery.scrollLoading.js' %}"></script>
+	<script>
+		$(document).ready(function(){
+			$(".scrollLoading").scrollLoading();
+		});
+	</script>
+	{% block inner_extra_js %}{% endblock %}
+{% endblock %}
+
+{% block nav_3 %}focus{% endblock %}

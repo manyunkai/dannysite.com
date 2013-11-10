@@ -1,0 +1,91 @@
+{% extends "account/base.html" %}
+{% load staticfiles %}
+{% load widget_tweaks %}
+
+{% block extra_link %}
+	<link href="{% static 'site/v3/css/login.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block inner_extra_js %}
+	<script>
+		function errorMsgPopup(title, message){
+			$('#error_title').text(title);
+			$('#error_msg').text(message);
+			
+			$('.popupBox').fadeIn('fast');
+		}
+		
+		$(document).ready(function(){
+			$('#error_confirm').bind('click', function(){
+				$('.popupBox').fadeOut('fast');
+			});
+		})
+		
+		$(document).ready(function(e) {
+			var captcha = $('#captcha');
+			var form = $('#login_form');
+			var submit_btn = $('#login_submit');
+			var submit_status = 0;
+			
+			function form_submit(){
+				if (submit_status){
+					return false;
+				}
+				submit_status = 1;
+				$(this).css('background-color', '#eb9300');
+				$(this).text('请稍后...');
+				$.ajax({
+					url: form.attr('action'),
+					type: 'POST',
+					data: form.serialize(),
+					dataType: 'json'
+				})
+				.success(function(data){
+					if (data.status){
+						window.location.href = data.redirect;
+					} else {
+						errorMsgPopup('登录失败', data.message);
+					}
+				})
+				.error(function(jqXHR, textStatus) {
+					errorMsgPopup('发生错误', '表单提交失败：服务器或网络错误，请重试。');
+				})
+				.complete(function(jqXHR, textStatus){
+					submit_btn.css('background-color', '#f39800');
+					submit_btn.text('登录');
+					submit_status = 0;
+				});
+				return false;
+			}
+			
+			submit_btn.bind('click', form_submit);
+		});
+	</script>
+{% endblock %}
+
+{% block container %}
+	<div class="normBox bg1" id="login_box">
+    	<div class="top bg2 fs18 textCenter" id="login_title">
+        	<span>登录以继续您的操作</span>
+        </div>
+        <form id="login_form" action="{% url 'acct_login' %}" method="post">
+        	{% csrf_token %}
+        	<div class="pt26 textCenter" id="login_form_box">
+              	<div class="input_box">
+              		{{ form.email|attr:"class:xnorminput"|attr:"placeholder:账户名" }}
+              	</div>
+              	<div class="input_box pt16">
+              		{{ form.password|attr:"class:xnorminput"|attr:"placeholder:密码" }}
+              	</div>
+                <div class="input_box pt16">
+                	<button class="cubeBtn" type="submit" id="login_submit">登录</button>
+                </div>
+                <div class="input_box pt16">
+                    <!--<a href="#" class="fs14 normDecorA">忘记密码？</a>-->
+                </div>
+            </div>
+        </form>
+        <div class="clearfloat">
+        </div>
+    <!-- end .normBox --></div>
+{% endblock %}

@@ -1,0 +1,27 @@
+<div class="paginator fltlft textRight" id="blog_paginator">
+	{% if page_range.0 > 2 %}
+		<a class="pageItem" href="{{ url_prefix }}1"><<</a>
+	{% endif %}
+	{% if not page_range.0 == 1 %}
+		<a class="pageItem" href="{{ url_prefix }}{{ page_range.0|add:'-1' }}"><</a>
+	{% endif %}
+	{% for page in page_range %}
+		{% if forloop.first %}
+			{% if page > 2 %}
+				
+			{% endif %}
+			{% if not page == 1 %}
+				
+			{% endif %}
+		{% endif %}
+		<a class="pageItem{% if page == page_instance.current_page %} pageItemFocus{% endif %}" href="{{ url_prefix }}{{ page }}">{{ page }}</a>
+		{% if forloop.last %}
+			{% if page < page_instance.last_page %}
+				<a class="pageItem" href="{{ url_prefix }}{{ page|add:'1' }}">></a>
+			{% endif %}
+			{% if page < page_instance.last_page|add:'-1'  %}
+			    <a class="pageItem" href="{{ url_prefix }}{{ page_instance.last_page }}">>></a>
+			{% endif %}
+		{% endif %}
+	{% endfor %}
+</div>

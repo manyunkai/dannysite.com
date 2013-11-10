@@ -1,0 +1,14 @@
+@charset "utf-8";
+#login_box {
+	width: 541px;
+	padding-bottom: 25px;
+}
+#login_box #login_title {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+.container {
+	position: absolute;
+	top: 50%;
+	margin-top: -265px;
+}

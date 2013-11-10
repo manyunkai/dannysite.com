@@ -1,0 +1,48 @@
+{% load staticfiles %}
+
+<div class="fltrt sidebar">
+	<div class="searchBox">
+    	<form action="" method="get" id="search_form">
+    		<input class="xnorminput" id="search" name="search" type="text" placeholder="搜索博客" />
+        </form>
+        <div class="searchIcon" onclick="document.getElementById('search_form').submit();"id="search_icon"></div>
+    </div>
+    <div class="rssBox bg1 mt10 textCenter">
+    	<img src="{% static 'site/v3/img/rss.png' %}" width="36" height="36"><a class="blueA fs16" href="{% url 'blog_rss' %}">订阅我的博客</a>
+    </div>
+    <div class="listBox2 mt37">
+        <ul>
+            <li class="listTitle textCenter">CATEGORIES</li>
+            {% for cate in categories %}
+            	<a href="{% url 'blog_home' %}?cat={{ cate.id }}"><li class="listItem fltlft textCenter">{{ cate.name }}</li></a>
+            {% endfor %}
+            <li class="clearfloat"></li>
+        </ul>
+    </div>
+    <div class="listBox2 mt37">
+        <ul>
+            <li class="listTitle textCenter">POPULAR</li>
+            {% for blog in pblogs %}
+	            <a href="{% url 'blog_detail' blog.id %}"><li class="listItemF textCenter">{{ blog.title }}</li></a>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="tagBox mt37">
+    	<div class="title textCenter">TAGS</div>
+        <div class="tags textCenter">
+        	{% for tag in tags %}
+        		<a class="tagItem" href="{% url 'blog_home' %}?tag={{ tag.id }}">{{ tag.name }}</a>
+        	{% endfor %}
+        </div>
+    </div>
+    {% if links %}
+	    <div class="listBox2 mt37">
+	        <ul>
+	            <li class="listTitle textCenter">LINKS</li>
+	            {% for link in links %}
+		            <a href="{{ link.url }}" target="_blank"><li class="listItemF textCenter">{{ link.name }}</li></a>
+	            {% endfor %}
+	        </ul>
+	    </div>
+	{% endif %}
+</div>
