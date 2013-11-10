@@ -5,6 +5,29 @@
 
 {% block meta_desc %}DannySite博客，记录学习笔记、心得以及生活点滴，技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}
 
+{% block inner_extra_js %}
+<script src="{% static 'site/v3/js/highlighter.js' %}"></script>
+<script>
+	(function($){
+		$.getUrlParam = function(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if (r!=null) return unescape(r[2]); return null;
+		}
+	})(jQuery);
+	$(document).ready(function(){
+		key = $.getUrlParam('search');
+		if (key){
+			var hl = new Highlighter();
+			nodes = $('.contentBox').find('p');
+			for (var i=0; i < nodes.length;i++){
+			    hl.highlight(nodes[i], 'linux');  
+			}
+		}
+	});
+</script>
+{% endblock %}
+
 {% block container %}
 	<div class="normBox">
     	{% include "dblog/includes/sidebar.html" %}
