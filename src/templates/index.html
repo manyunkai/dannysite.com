@@ -74,7 +74,7 @@
 	                <div id="photo_desc_txt">
 	                    <span class="fs18 enFont block" id="photo_title">{{ latest_photo.title }}</span>
 	                    <span class="fs14 enFont block pt8" id="photo_author">{{ latest_photo.author }}</span>
-	                    <span class="fs14 enFont block pt26" id="photo_desc">{{ latest_photo.description }}</span>
+	                    <span class="fs14 enFont block pt26" id="photo_desc" title="{{ latest_photo.description }}">{{ latest_photo.description|truncatechars:130 }}</span>
 	                </div>
 	            </div>
 	            <div class="fltlf posRelat">
