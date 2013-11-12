@@ -120,6 +120,8 @@ h1, h2, h3, h4, h5, h6, p {
 	font-size: 16px;
 	padding-top: 16px;
 	padding-bottom: 16px;
+	transition: background-color .15s;
+	-webkit-transition: background-color .15s;
 }
 .listBox .listItem:hover {
 	background-color: #eeeeee;
@@ -153,12 +155,16 @@ h1, h2, h3, h4, h5, h6, p {
 	font-size: 14px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	transition: background-color .1s;
+	-webkit-transition: background-color .1s;
 }
 .listBox2 .listItemF  {
 	width: 100%;
 	font-size: 14px;
 	padding-top: 5px;
 	padding-bottom: 5px;
+	transition: background-color .1s;
+	-webkit-transition: background-color .1s;
 }
 .listBox2 .listItem:hover, .listBox2 .listItemF:hover {
 	background-color: #eeeeee;
@@ -299,8 +305,6 @@ h1, h2, h3, h4, h5, h6, p {
 .bgwhite {
 	background-color: #FFF;
 }
-
-
 .nav .nav_btn {
 	display: inline-block;
 	padding-top: 20px;
@@ -311,6 +315,8 @@ h1, h2, h3, h4, h5, h6, p {
 	color: #5e5e5e;
 	font-size: 18px;
 	+margin-bottom: -1px;
+	transition: background-color .15s;
+	-webkit-transition: background-color .15s;
 }
 .nav .nav_btn:hover {
 	background-color: #eeeeee;
@@ -370,15 +376,19 @@ h1, h2, h3, h4, h5, h6, p {
 }
 input {
 	-webkit-appearance: none;
+	outline: none;
+	transition: border-color .15s;
+	-webkit-transition: border-color .15s;
 }
 input::-webkit-search-decoration, input::-webkit-search-cancel-button {
 	display: none;
 }
-input {
-	outline: none;
-}
 input:focus {
 	border: 2px solid #d6d6d6;
+}
+button {
+	transition: background-color .15s;
+	-webkit-transition: background-color .15s;
 }
 textarea {
 	outline: none;
@@ -478,6 +488,8 @@ textarea:focus {
 	padding: 10px 0px;
 	width: 41px;
 	text-align: center;
+	transition: background-color .15s;
+	-webkit-transition: background-color .15s;
 }
 .pageItem:hover {
 	background-color: #eeeeee;
@@ -530,4 +542,11 @@ textarea:focus {
 }
 .pageError span {
 	display: block;
+}
+a[title="腾讯分析"] {
+	display: none;
+}
+a {
+	transition: color .15s;
+	-webkit-transition: color .15s;
 }
