@@ -2,8 +2,8 @@
 '''
 Created on 2013-10-24
 
-@author: Danny<manyunkai@hotmail.com>
-DannyWork Project
+@author: Ex_Sides
+Copyright 2007 - 2013 DannyWork Project
 '''
 
 import urlparse
@@ -32,8 +32,8 @@ class BlogBase(BaseView):
 
     def get_context_data(self, extra_context):
         context = {
-            'categories': Category.objects.all(),
-            'tags': Tag.objects.all().order_by('?')[:self.tags_shown_count],
+            'categories': Category.objects.exclude(count=0),
+            'tags': Tag.objects.exclude(count=0).order_by('?')[:self.tags_shown_count],
             'pblogs': Blog.objects.all().order_by('-click_count', '-created')[:8],
             'links': Link.objects.all()
         }

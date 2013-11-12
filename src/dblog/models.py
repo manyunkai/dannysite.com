@@ -2,8 +2,8 @@
 '''
 Created on 2013-10-24
 
-@author: Danny<manyunkai@hotmail.com>
-DannyWork Project
+@author: Ex_Sides
+Copyright 2007 - 2013 DannyWork Project
 '''
 
 from django.db import models
@@ -131,13 +131,20 @@ def blog_pre_save(sender, **kwargs):
     try:
         prev = Blog.objects.get(id=curr.id)
     except Blog.DoesNotExist:
-        curr.theme.incr()
-        curr.cate.incr()
+        if not curr.is_draft or curr.is_published:
+            curr.theme.incr()
+            curr.cate.incr()
     else:
         for item in ['theme', 'cate']:
+            prev_ps = prev.is_published and not prev.is_draft
+            curr_ps = curr.is_published and not curr.is_draft
+
             prev_obj, curr_obj = getattr(prev, item), getattr(curr, item)
-            if not prev_obj == curr_obj:
+
+            if prev_ps and not curr_ps or prev_ps and not prev_obj == curr_obj:
                 prev_obj.decr()
+
+            if curr_ps:
                 curr_obj.incr()
 
 
