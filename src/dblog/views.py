@@ -2,8 +2,8 @@
 '''
 Created on 2013-10-24
 
-@author: Ex_Sides
-Copyright 2007 - 2013 DannyWork Project
+@author: Danny<manyunkai@hotmail.com>
+DannyWork Project
 '''
 
 import urlparse
@@ -122,11 +122,16 @@ class GetHome(BlogBase):
 
 class GetDetail(BlogBase, AccessAuthMixin):
     template_name = 'dblog/detail.html'
+    max_recommended_count = 8
 
     def get_context_data(self, extra_context):
         context = super(GetDetail, self).get_context_data(extra_context)
         context['form'] = CommentForm()
         return context
+
+    def get_recommends(self, curr):
+        return Blog.objects.filter(Q(tags__in=curr.tags.all()) |
+                                   Q(cate=curr.cate)).exclude(id=curr.id).distinct()[:self.max_recommended_count]
 
     def get(self, request, bid):
         try:
@@ -139,6 +144,7 @@ class GetDetail(BlogBase, AccessAuthMixin):
 
         extra_context = {
             'blog': blog,
+            'recommends': self.get_recommends(blog),
             'comments': DComment.objects.get_comments(blog)
         }
         return self.render_to_response(self.get_context_data(extra_context))

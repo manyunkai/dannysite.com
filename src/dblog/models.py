@@ -2,8 +2,8 @@
 '''
 Created on 2013-10-24
 
-@author: Ex_Sides
-Copyright 2007 - 2013 DannyWork Project
+@author: Danny<manyunkai@hotmail.com>
+DannyWork Project
 '''
 
 from django.db import models

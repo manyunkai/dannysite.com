@@ -4,6 +4,7 @@ html {
 	height: 100%;
 	margin: 0;
 	padding: 0;
+	-ms-text-size-adjust: none;
 }
 body {
 	min-height: 100%;

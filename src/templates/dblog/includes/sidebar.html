@@ -19,14 +19,25 @@
             <li class="clearfloat"></li>
         </ul>
     </div>
-    <div class="listBox2 mt37">
-        <ul>
-            <li class="listTitle textCenter">POPULAR</li>
-            {% for blog in pblogs %}
-	            <a href="{% url 'blog_detail' blog.id %}"><li class="listItemF textCenter">{{ blog.title }}</li></a>
-            {% endfor %}
-        </ul>
-    </div>
+    {% if recommends %}
+    	<div class="listBox2 mt37">
+	        <ul>
+	            <li class="listTitle textCenter">RECOMMANDS</li>
+	            {% for blog in recommends %}
+		            <a href="{% url 'blog_detail' blog.id %}" title="{{ blog.title }}"><li class="listItemF textCenter">{{ blog.title|truncatechars:20 }}</li></a>
+	            {% endfor %}
+	        </ul>
+	    </div>
+    {% else %}
+	    <div class="listBox2 mt37">
+	        <ul>
+	            <li class="listTitle textCenter">POPULAR</li>
+	            {% for blog in pblogs %}
+		            <a href="{% url 'blog_detail' blog.id %}" title="{{ blog.title }}"><li class="listItemF textCenter">{{ blog.title|truncatechars:20 }}</li></a>
+	            {% endfor %}
+	        </ul>
+	    </div>
+    {% endif %}
     <div class="tagBox mt37">
     	<div class="title textCenter">TAGS</div>
         <div class="tags textCenter">
