@@ -25,7 +25,5 @@ DannySite是一个由个人兴趣与学习实践而生的个人网站。网站�
 ### 目前未完善的功能和已知Bugs
 
 * Account: 注册、密码修改、密码重置等template未完成；
-* Blog: 未公开Blog的显示与相应统计问题；
-* Blog: 草稿状态的Blog的统计问题；
 * Ueditor: 上传图片等重写View后未考虑路径传入；
 * Mail: 注册邀请邮件未投递。
