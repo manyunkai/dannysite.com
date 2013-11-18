@@ -34,6 +34,7 @@ class BlogAdmin(admin.ModelAdmin):
 
     def tag_display(self, obj):
         return ', '.join([tag.name for tag in obj.tags.all()])
+    tag_display.short_description = u'标签'
 
 
 class CAdmin(admin.ModelAdmin):

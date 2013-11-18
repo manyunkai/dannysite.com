@@ -56,17 +56,25 @@ class GetHome(BlogBase):
 
     def get_queryset(self, cate_id, tag_id, q):
         if cate_id:
+            if not cate_id.isdigit():
+                raise Http404
+
             try:
                 cate = Category.objects.get(id=cate_id)
             except Category.DoesNotExist:
                 raise Http404
+
             blogs = Blog.objects.filter(cate=cate)
             filter = cate.name
         elif tag_id:
+            if not tag_id.isdigit():
+                raise Http404
+
             try:
                 tag = Tag.objects.get(id=tag_id)
             except Tag.DoesNotExist:
                 raise Http404
+
             blogs = tag.blog_set.all()
             filter = tag.name
         elif q:
@@ -99,9 +107,9 @@ class GetHome(BlogBase):
                                     '&'.join(query), ''))
 
     def get(self, request):
-        cate_id = request.GET.get('cat', None)
-        tag_id = request.GET.get('tag', None)
-        q = request.GET.get('search', None)
+        cate_id = request.GET.get('cat', '')
+        tag_id = request.GET.get('tag', '')
+        q = request.GET.get('search', '')
 
         blogs, filter = self.get_queryset(cate_id, tag_id, q)
         paginator = Paginator(self.get_loader(blogs), self.page_size,

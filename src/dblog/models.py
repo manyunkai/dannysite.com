@@ -144,7 +144,7 @@ def blog_pre_save(sender, **kwargs):
             if prev_ps and not curr_ps or prev_ps and not prev_obj == curr_obj:
                 prev_obj.decr()
 
-            if curr_ps:
+            if curr_ps and not prev_ps or curr_ps and not prev_obj == curr_obj:
                 curr_obj.incr()
 
 
