@@ -61,6 +61,7 @@ class Photo(models.Model):
 
 class ShareCategory(models.Model):
     name = models.CharField(u'类名', max_length=64)
+    color = models.CharField(u'主题色', max_length=6)
     created = models.DateTimeField(u'创建时间', auto_now_add=True)
 
     def __unicode__(self):
@@ -74,8 +75,9 @@ class ShareCategory(models.Model):
 class Share(models.Model):
     title = models.CharField(u'标题', max_length=100)
     author = models.ForeignKey(User, verbose_name=u'作者', null=True, blank=True)
+    cate = models.ForeignKey(ShareCategory, verbose_name=u'分类')
     cover = models.ImageField(upload_to=path_and_rename, verbose_name=u'封面')
-    abstract = models.CharField(u'摘要', max_length=1000)
+    abstract = models.CharField(u'摘要', max_length=5000)
     content = models.TextField(u'正文', blank=True)
     is_published = models.BooleanField(u'公开状态', default=True)
     created = models.DateTimeField(u'创建时间', auto_now_add=True)

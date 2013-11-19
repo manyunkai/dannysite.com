@@ -1,0 +1,13 @@
+{% for share in page_instance.page_items %}
+    <div class="inBox bg1" style="border-top-width: 2px; border-top-style: solid; border-top-color: #{{ share.cate.color }};">
+    	<div class="inTitle textCenter">
+        	<a class="fs24" onMouseOver="this.style.color='#{{ share.cate.color }}'" onMouseOut="this.style.color='#5e5e5e'" style="color: #5e5e5e; text-decoration: none;">{{ share.title }}</a>
+        </div>
+        <div class="inImage">
+        	<img src="{{ share.cover.url }}" width="950px">
+        </div>
+        <div class="InDesc fs14">
+        	{{ share.abstract|linebreaks }}
+        </div>
+    </div>
+{% endfor %}

@@ -12,9 +12,10 @@ import random
 from django.conf import settings
 
 from core.views import BaseView
-from dshare.models import Photo
+from dshare.models import Photo, ShareCategory, Share
 from django.templatetags.static import static
 from core.http import JsonResponse
+from common.paginator import Paginator
 
 
 bg = static('site/v3/img/bgw.png')
@@ -165,4 +166,50 @@ class GetPhotoHome(BaseView):
             context.pop('top_photo')
             return JsonResponse(status=1, data=context)
 
+        return self.render_to_response(context)
+
+
+class GetShareHome(BaseView):
+    template_name = 'dshare/interests.html'
+    template_name_ajax = 'dshare/includes/inbox.html'
+    page_size = 10
+    section_size = 30
+
+    def get_session_key(self):
+        return 'share:list'
+
+    def get_loader(self, shares):
+        def loader(offset, num):
+            return shares[offset:offset + num]
+        return loader
+
+    def get_template_names(self):
+        if self.request.is_ajax():
+            return [self.template_name_ajax]
+        return [self.template_name]
+
+    def get(self, request):
+        shares = Share.objects.all()
+        paginator = Paginator(self.get_loader(shares), self.page_size,
+                              self.section_size, shares.count())
+        page_instance = paginator.page(request, self.get_session_key())
+
+        context = {
+            'page_instance': page_instance,
+        }
+
+        if request.is_ajax():
+            html = self.render_to_response(context)
+            html.render()
+            data = {
+                'html': html.content,
+                'has_next': page_instance.has_next()
+            }
+            return JsonResponse(status=1, data=data)
+
+        cates = ShareCategory.objects.all()
+        context.update({
+            'cates': cates,
+            'cate_color_box_width': 79 * cates.count(),
+        })
         return self.render_to_response(context)

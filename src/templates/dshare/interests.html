@@ -1,0 +1,34 @@
+{% extends "dshare/interests_base.html" %}
+{% load staticfiles %}
+
+{% block title %}兴趣 - DannySite{% endblock %}
+{% block meta_desc %}DannySite兴趣收藏夹，收集喜欢的文摘、音乐、影视、游戏等，并在此与大家共赏。DannySite是Danny的个人网站，采用的Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}
+{% block meta_keywords %}兴趣,收藏,文摘,游戏,影视,音乐,生活,个人网站,分享{% endblock %}
+
+{% block inner_extra_js %}
+	<script src="{% static 'site/v3/js/share_handler.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+  	<div class="normBox">
+    	<div class="themeTop">
+            <div class="themeTitle fltlft">
+                <span class="fs36">兴趣</span>
+                <span class="fs24 enFont">Interests</span>
+            </div>
+            <div class="inCate fltrt" style="width: {{ cate_color_box_width }}px">
+                <div class="cates">
+                	{% for cate in cates %}
+	                    <span class="inCateColor fltlft" style="background-color: #{{ cate.color }}"></span>
+                	{% endfor %}
+                    <span class="clearfloat"></span>
+                </div>
+            </div>
+            <div class="clearfloat"></div>
+        </div>
+        {% include "dshare/includes/inbox.html" %}
+        {% if page_instance.has_next %}
+        	<div class="getMore bg1 textCenter" data-page="2"><span class="fs16">查看更多</span></div>
+        {% endif %}
+  	<!-- end .normBox --></div>
+{% endblock %}

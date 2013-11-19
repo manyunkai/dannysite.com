@@ -83,7 +83,7 @@ class PhotoCategoryAdmin(admin.ModelAdmin):
 
 
 class ShareAdmin(admin.ModelAdmin):
-    fields = ['title', 'cover', 'abstract', 'content', 'is_published']
+    fields = ['title', 'cate', 'cover', 'abstract', 'content', 'is_published']
     form = FocusForm
     formfield_overrides = {
         models.ImageField: {'widget': AdminImageWidget},

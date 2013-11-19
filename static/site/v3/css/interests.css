@@ -1,0 +1,87 @@
+@charset "utf-8";
+.gameBox {
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-top-color: #049ff1;
+}
+.gameBox a {
+	color: #5e5e5e;
+	text-decoration: none;
+}
+.gameBox a:hover {
+	color: #049ff1;
+}
+.gameThemeColor {
+	background-color: #049ff1;
+}
+.mediaBox {
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-top-color: #43a102;
+}
+.mediaBox a {
+	color: #5e5e5e;
+	text-decoration: none;
+}
+.mediaBox a:hover {
+	color: #43a102;
+}
+.mediaThemeColor {
+	background-color: #43a102;
+}
+.letterBox {
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-top-color: #ff9900;
+}
+.letterDecorA {
+	color: #5e5e5e;
+	text-decoration: none;
+}
+.letterDecorA:hover {
+	color: #ff9900;
+}
+.letterThemeColor {
+	background-color: #ff9900;
+}
+.inCate {
+	position: relative;
+	width: 237px;
+	height: 46px;
+}
+.inCate .cates {
+	position: absolute;
+	bottom: 0px;
+}
+.inCateColor {
+	font-size: 1px;
+	height: 4px;
+	width: 79px;
+	display: inline-block;
+}
+.inBox {
+	width: 100%;
+	margin-top: 34px;
+}
+.inBox .inTitle {
+	width: 930px;
+	padding: 12px 10px;
+}
+.inBox .InDesc {
+	padding: 12px 4px 7px 4px;
+}
+.inBox .InDesc p {
+	line-height: 25px;
+}
+.getMore {
+	cursor: pointer;
+	width: 100%;
+	margin-top: 10px;
+}
+.getMore:hover {
+	background-color: #eeeeee;
+}
+.getMore span{
+	display: block;
+	padding: 10px 0px;
+}

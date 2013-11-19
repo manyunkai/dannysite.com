@@ -69,6 +69,9 @@
 	padding: 10px 0px;
 	word-break: break-all;
 }
+.contentBox img {
+	max-width: 605px;
+}
 .contentBox a {
 	color: #1d8dcd !important;
 	text-decoration: none !important;
