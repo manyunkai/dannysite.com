@@ -4,6 +4,7 @@ import os
 import json
 import uuid
 import settings as u_settings
+from django.conf import settings as g_settings
 
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -31,7 +32,8 @@ class UploadImage(View, ImageAutoHandleMixin):
         return super(UploadImage, self).dispatch(*args, **kwargs)
 
     def post(self, request, action, uploadpath):
-        # TODO ... 加入对传入的 uploadpath 的支持
+        # TODO ... 加入对传入的 uploadpath 的支持，目前仅为临时解决
+        self.image_conf['origin']['dir'] = os.path.join(g_settings.MEDIA_ROOT, uploadpath)
         if not request.user.is_authenticated():
             return JsonResponse(state='Permission denied.')
 

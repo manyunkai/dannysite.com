@@ -32,7 +32,7 @@ class Feedback(models.Model):
 
 
 def str_crc32(string):
-    return(hex(binascii.crc32(string.encode()))[2:])
+    return(hex(binascii.crc32(string.encode('utf8')))[2:])
 
 
 def link_image_upload(instance, filename):

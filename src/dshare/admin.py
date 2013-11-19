@@ -15,8 +15,8 @@ from django.http.response import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 from django.conf import settings
 
-from dshare.models import Photo, PhotoCategory
-from dshare.forms import PhotoForm
+from dshare.models import Photo, PhotoCategory, Share, ShareCategory
+from dshare.forms import PhotoForm, FocusForm
 from core.widgets import AdminImageWidget
 
 
@@ -82,5 +82,26 @@ class PhotoCategoryAdmin(admin.ModelAdmin):
     pass
 
 
+class ShareAdmin(admin.ModelAdmin):
+    fields = ['title', 'cover', 'abstract', 'content', 'is_published']
+    form = FocusForm
+    formfield_overrides = {
+        models.ImageField: {'widget': AdminImageWidget},
+    }
+    list_display = ['title', 'author', 'abstract', 'created', 'is_published']
+    list_editable = ['is_published']
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            obj.author = request.user
+        obj.save()
+
+
+class ShareCategoryAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Photo, PhotoAdmin)
 admin.site.register(PhotoCategory, PhotoCategoryAdmin)
+admin.site.register(Share, ShareAdmin)
+admin.site.register(ShareCategory, ShareCategoryAdmin)

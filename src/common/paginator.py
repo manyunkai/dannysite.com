@@ -1,9 +1,9 @@
 # -*-coding:utf-8 -*-
 '''
-Created on 2013-8-6
-@author: Danny<manyunkai@hotmail.com>
+Created on 2013-10-24
 
-Copyright (C) 2012-2014 DannyWork Project
+@author: Danny<manyunkai@hotmail.com>
+DannyWork Project
 '''
 
 import math

@@ -23,8 +23,8 @@ class PhotoCategory(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = u'分类'
-        verbose_name_plural = u'分类'
+        verbose_name = u'图片分类'
+        verbose_name_plural = u'图片分类'
 
 
 def str_uuid1():
@@ -32,8 +32,11 @@ def str_uuid1():
 
 
 def path_and_rename(instance, filename):
-    return os.path.join(settings.PHOTO_CONF['origin']['dir'],
-                        str_uuid1() + os.path.splitext(filename)[1])
+    if type(instance) == Photo:
+        path = settings.PHOTO_CONF['origin']['dir']
+    elif type(instance) == Share:
+        path = settings.SHARE_IMAGE_CONF['origin']['dir']
+    return os.path.join(path, str_uuid1() + os.path.splitext(filename)[1])
 
 
 class Photo(models.Model):
@@ -54,3 +57,33 @@ class Photo(models.Model):
         ordering = ['-created']
         verbose_name = u'图片'
         verbose_name_plural = u'图片'
+
+
+class ShareCategory(models.Model):
+    name = models.CharField(u'类名', max_length=64)
+    created = models.DateTimeField(u'创建时间', auto_now_add=True)
+
+    def __unicode__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = u'兴趣分类'
+        verbose_name_plural = u'兴趣分类'
+
+
+class Share(models.Model):
+    title = models.CharField(u'标题', max_length=100)
+    author = models.ForeignKey(User, verbose_name=u'作者', null=True, blank=True)
+    cover = models.ImageField(upload_to=path_and_rename, verbose_name=u'封面')
+    abstract = models.CharField(u'摘要', max_length=1000)
+    content = models.TextField(u'正文', blank=True)
+    is_published = models.BooleanField(u'公开状态', default=True)
+    created = models.DateTimeField(u'创建时间', auto_now_add=True)
+
+    def __unicode__(self):
+        return self.title
+
+    class Meta:
+        ordering = ['-created']
+        verbose_name = u'兴趣'
+        verbose_name_plural = u'兴趣'

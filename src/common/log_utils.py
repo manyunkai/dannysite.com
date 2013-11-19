@@ -2,8 +2,7 @@
 '''
 Created on 2013-10-11
 @author: Danny<manyunkai@hotmail.com>
-
-Copyright (C) 2012-2014 DannyWork Project
+DannyWork Project
 '''
 
 import logging

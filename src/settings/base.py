@@ -290,6 +290,39 @@ FOCUS_IMAGE_CONF = {
     }
 }
 
+SHARE_IMAGE_ROOT = 'images/share/'
+SHARE_IMAGE_CONF = {
+    'limits': {
+        'formats': ['.jpg', '.gif', 'jpeg', '.bmp', '.png'],
+        'max_file_size': 10 * 1024 * 1024,
+        'min_image_size': (960, 300)
+    },
+    'origin': {
+        'dir': os.path.join(SHARE_IMAGE_ROOT)
+    },
+    'dims': {
+        'normal': {
+            'action': 'crop',
+            'size': (960, 300),
+            'dir': os.path.join(MEDIA_ROOT, SHARE_IMAGE_ROOT),
+            'quality': 100
+        }
+    }
+}
+
+SHARE_UPLOADED_IMAGE_URL = 'images/share/uploads/'
+SHARE_UPLOADED_IMAGE_CONF = {
+    'limits': {
+        'formats': ('.jpg', '.gif', '.jpeg', '.bmp', '.png'),  # 允许上传的文件类型
+        'max_file_size': 5 * 1024 * 1024,                      # 上传的文件大小限制
+    },
+    'origin': {
+        'dir': os.path.join(SHARE_IMAGE_ROOT, 'uploads/')
+    },
+    'dims': {
+    },
+}
+
 PHOTO_ROOT = 'images/photos/'
 
 PHOTO_CONF = {

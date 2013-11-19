@@ -2,8 +2,7 @@
 '''
 Created on 2013-6-10
 @author: Danny<manyunkai@hotmail.com>
-
-Copyright (C) 2012-2014 DannyWork Project
+DannyWork Project
 '''
 
 import os
@@ -62,8 +61,7 @@ class ImageIOTools(object):
         return Image.open(full)
 
     @classmethod
-    def save(cls, image, path, filename,
-             format="JPEG", quality=100, create_dir=True):
+    def save(cls, image, path, filename, format='', quality=100, create_dir=True):
         '''
         保存Image对象到文件系统.
 
@@ -85,7 +83,14 @@ class ImageIOTools(object):
                 os.makedirs(path)
             else:
                 return False
-        image.save(os.path.join(path, filename), format, quality=quality)
+        params = {
+            'fp': os.path.join(path, filename),
+            'quality': quality
+        }
+        if format:
+            params['format'] = format
+
+        image.save(**params)
         return True
 
 
@@ -181,7 +186,7 @@ class ImageTrimTools(object):
         """
         x, y = img.size
 
-        if x > y and width:
+        if x > y and width or not height:
             x_s = width
             y_s = y * x_s / x
         elif x <= y and height:
@@ -452,8 +457,7 @@ class ModelImageParser(GenericImageParser):
         return True
 
     def save(self):
-        filename = os.path.splitext(os.path.basename(self.file_path))[0]
-        if self.save_all_dims(self.parsed, filename + '.jpg'):
+        if self.save_all_dims(self.parsed, os.path.basename(self.file_path)):
             return False
         return True
 
