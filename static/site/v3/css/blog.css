@@ -164,3 +164,30 @@
 	vertical-align: middle;
 	padding: 10px 8px;
 }
+.blog_topic .left_title {
+	width: 75px;
+	position: absolute;
+	top: 50%;
+	margin-top: -11px;
+}
+.blog_topic {
+	position: relative;
+}
+
+.blog_topic .blogs_in_topic {
+	width: 538px;
+	padding: 0px 10px 10px 10px;
+	border-top-width: 2px;
+	border-top-style: dashed;
+	border-top-color: #eeeeee;
+	border-bottom-width: 2px;
+	border-bottom-style: dashed;
+	border-bottom-color: #eeeeee;
+}
+.blog_topic .blogs_in_topic ul {
+	list-style-type: none;
+
+}
+.blog_topic .blogs_in_topic ul li {
+	padding-top: 10px;
+}

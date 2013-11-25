@@ -9,13 +9,14 @@ DannyWork Project
 from django.contrib import admin
 from django.db import models
 
-from dblog.models import Blog, Theme, Category, Tag
+from dblog.models import Blog, Theme, Category, Tag, Topic
 from ueditor.widgets import UEditorWidget
 from django.conf import settings
 
 
 class BlogAdmin(admin.ModelAdmin):
-    fields = ['title', 'theme', 'cate', 'content', 'tags', 'is_draft', 'is_published']
+    fields = ['title', 'theme', 'cate', 'topic',
+              'content', 'tags', 'is_draft', 'is_published']
     list_display = ['title', 'theme', 'cate', 'author', 'tag_display', 'created',
                     'click_count', 'comment_count', 'is_draft', 'is_published']
     list_editable = ['is_draft', 'is_published']
@@ -42,4 +43,4 @@ class CAdmin(admin.ModelAdmin):
     list_display = ['name', 'count', 'created']
 
 admin.site.register(Blog, BlogAdmin)
-admin.site.register([Theme, Category, Tag], CAdmin)
+admin.site.register([Theme, Category, Tag, Topic], CAdmin)

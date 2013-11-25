@@ -66,10 +66,20 @@ class Theme(BaseModel):
         verbose_name_plural = u'主题'
 
 
+class Topic(BaseModel):
+    description = models.CharField(u'描述', max_length=2000, blank=True)
+
+    class Meta:
+        db_table = 'dblog_topic'
+        verbose_name = u'专题'
+        verbose_name_plural = u'专题'
+
+
 class Blog(models.Model):
     title = models.CharField(u'标题', max_length=100)
     theme = models.ForeignKey(Theme, verbose_name=u'主题')
     cate = models.ForeignKey(Category, verbose_name=u'分类')
+    topic = models.ForeignKey(Topic, verbose_name=u'专题', null=True, blank=True)
     author = models.ForeignKey(User, verbose_name=u'作者')
     created = models.DateTimeField(u'创建时间', auto_now_add=True)
     updated = models.DateTimeField(u'修改时间', auto_now=True)

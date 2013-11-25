@@ -24,4 +24,19 @@
     <div class="contentBox bg1">
     	{{ blog.content|safe }}
     </div>
+    {% if relates %}
+	    <div class="blog_topic bg2">
+	    	<div class="left_title textCenter">
+	        	<span class="fs18 enFont">TOPIC</span>
+	        </div>
+	        <div class="blogs_in_topic fltrt bg1">
+	        	<ul class="blog_list fs14">
+	        		{% for blog in relates %}
+		            	<li><a class="blueA" href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a></li>
+	        		{% endfor %}
+	            </ul>
+	        </div>
+	        <div class="clearfloat"></div>
+	    </div>
+	{% endif %}
 </div>

@@ -150,8 +150,11 @@ class GetDetail(BlogBase, AccessAuthMixin):
         blog.click(self.get_client_ip(request))
         blog.tag_list = [tag.name for tag in blog.tags.all()]
 
+        relates = blog.topic.blog_set.exclude(id=blog.id) if blog.topic else []
+
         extra_context = {
             'blog': blog,
+            'relates': relates,
             'recommends': self.get_recommends(blog),
             'comments': DComment.objects.get_comments(blog)
         }
