@@ -7,6 +7,8 @@
 	border-bottom-style: solid;
 	border-top-color: #eeeeee;
 	border-bottom-color: #eeeeee;
+	height: 280px;
+	overflow: hidden;
 }
 #cover img {
 	display: block;

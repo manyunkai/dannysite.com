@@ -1,0 +1,48 @@
+{% load staticfiles %}
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>{% block title %}欢迎来访DannySite{% endblock %}</title>
+<meta name="description" content="{% block meta_desc %}Danny的个人网站，采用的Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}">
+<meta name="keywords" content="{% block meta_keywords %}编程,Python,Django,HTML,CSS,JavaScript,Redis,Linux,PHP,个人网站{% endblock %}">
+{% block extra_metas %}
+{% endblock %}
+<link href="{% static 'site/v3/css/base_m.css' %}" rel="stylesheet" type="text/css">
+
+{% block extra_link %}{% endblock %}
+
+{% block extra_js %}{% endblock %}
+</head>
+
+<body>
+
+<div class="container">
+  	<div class="normBox logo bg1 textCenter">
+    	<a href="/"><img src="{% static 'site/v3/img/LOGO_B.png' %}" alt="Logo for DannySite" width="360" height="65"></a>
+    <!-- end .normBox --></div>
+    <div class="normBox nav bg2">
+    	<a class="nav_btn {% block nav_1 %}{% endblock %} bg1 textCenter" href="{% url 'home' %}">首页</a>
+    	<a class="nav_btn {% block nav_2 %}{% endblock %} bg1 textCenter" href="{% url 'blog_home' %}">博客</a>
+    	<a class="nav_btn {% block nav_3 %}{% endblock %} bg1 textCenter" href="{% url 'photo_home' %}">图片</a>
+    	<a class="nav_btn {% block nav_4 %}{% endblock %} bg1 textCenter" href="{% url 'share_home' %}">兴趣</a>
+        <br class="clearfloat" />
+    <!-- end .normBox --></div>
+    {% block container %}
+	{% endblock %}
+   	<div class="footer bg1">
+       	<div class="normBox navBottom bg2">
+            <a class="nav_btn bg1 textCenter" href="{% url 'about' %}">关于与反馈</a>
+            <a class="nav_btn bg1 textCenter" href="?change_view_mode=desktop">切换桌面版</a>
+            <br class="clearfloat" />
+        <!-- end .normBox --></div>
+        <div class="copyright textCenter">
+        	<span>Copyright 2012 - 2014 <b><i>DannyWork</i> Project</b></span>
+        </div>
+    </div>
+<!-- end .container --></div>
+
+{% block popup %}{% endblock %}
+</body>
+</html>

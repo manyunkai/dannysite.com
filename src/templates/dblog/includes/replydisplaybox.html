@@ -2,7 +2,7 @@
 
 <div class="{% cycle 'replyBoxOdd' 'replyBoxEven bg2' %}">
     <div class="replyContent {% cycle 'fltlft' 'fltrt' %} fs14">
-        <span><a class="blueA" href="#" data-id="{{ reply.related_id }}" title="点击回复TA的留言">{{ reply.user_name }}</a> 回复说：{{ reply.comment|linebreaksbr }}</span>
+        <span><a class="blueA commentator" href="#" data-id="{{ reply.related_id }}" title="点击回复TA的留言">{{ reply.user_name }}</a> 回复说：{{ reply.comment|linebreaksbr }}</span>
     </div>
     <div class="replyerAvatar {% cycle 'fltrt' 'fltlft' %}">
         <img class="ctavatar" src="{% gravatar_url reply.user_email %}" width="63" height="63">

@@ -1,0 +1,17 @@
+{% extends "dshare/interests_base_m.html" %}
+{% load staticfiles %}
+
+{% block title %}兴趣 - DannySite{% endblock %}
+{% block meta_desc %}DannySite兴趣收藏夹，收集喜欢的文摘、音乐、影视、游戏等，并在此与大家共赏。DannySite是Danny的个人网站，采用的Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}
+{% block meta_keywords %}兴趣,收藏,文摘,游戏,影视,音乐,生活,个人网站,分享{% endblock %}
+
+{% block inner_extra_js %}
+	<script src="{% static 'site/v3/js/share_handler.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+    {% include "dshare/includes/inbox_m.html" %}
+    {% if page_instance.has_next %}
+    	<div class="getMore bg1 textCenter" data-page="2"><span>查看更多</span></div>
+    {% endif %}
+{% endblock %}

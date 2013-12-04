@@ -1,0 +1,14 @@
+{% load gravatar %}
+
+<div class="commentatorInfo bg2">
+    <div class="fltlft">
+        <img class="ctavatar" src="{% gravatar_url reply.user_email %}" width="128" height="128">
+    </div>
+    <div class="fs14 fltlft">
+        <span class="cmtInfo">来自 <a class="blueA commentator" href="#" data-id="{{ reply.related_id }}" title="点击回复TA的留言">{{ reply.user_name }}</a> 的回复</span>
+    </div>
+    <div class="clearfloat"></div>
+</div>
+<div class="cmtContent fs14 bg1">
+    <span>{{ reply.comment|linebreaksbr }}</span>
+</div>

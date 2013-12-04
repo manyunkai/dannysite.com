@@ -1,0 +1,27 @@
+{% load month %}
+<div class="blogBox bg1">
+	<div class="topBox">
+        <div class="timeBox fltlft enFont textCenter">
+            <span class="timeDay">{{ blog.created|date:"j" }}</span>
+            <span class="timeMonth">{{ blog.created|month|upper }}</span>
+        </div>
+        <div class="infoBox fltrt">
+            <div class="blogTitle bg1">
+                <a class="normDecorA" href="{% url 'blog_detail' blog.id %}">{{ blog.title }}</a>
+            </div>
+            <div class="blogCt bg2">
+                <span class="blogCate fltlft"><a class="blueA" href="{% url 'blog_home' %}?cat={{ blog.cate.id }}">{{ blog.cate.name }}</a></span>
+                <span class="blogTags fltlft">
+                	{% for tag in blog.tags.all %}
+                		<a class="blueA" href="{% url 'blog_home' %}?tag={{ tag.id }}">{{ tag.name }}</a>
+                	{% endfor %}
+                </span>
+                <span class="clearfloat"></span>
+            </div>
+        </div>
+        <div class="clearfloat"></div>
+    </div>
+    <div class="contentBox bg1">
+    	{{ blog.content|safe }}
+	</div>
+<!-- end .normBox --></div>

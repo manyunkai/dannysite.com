@@ -23,6 +23,12 @@ from dblog.models import Blog, Category
 
 class Index(TemplateView):
     template_name = 'index.html'
+    template_name_mobile = 'index_m.html'
+
+    def get_template_names(self):
+        if self.request.session.get('VIEW_MODE') == 'mobile':
+            return [self.template_name_mobile]
+        return [self.template_name]
 
     def get_context_data(self, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
@@ -43,6 +49,12 @@ class Index(TemplateView):
 
 class About(TemplateView):
     template_name = 'about.html'
+    template_name_mobile = 'about_m.html'
+
+    def get_template_names(self):
+        if self.request.session.get('VIEW_MODE') == 'mobile':
+            return [self.template_name_mobile]
+        return [self.template_name]
 
     def get_context_data(self, **kwargs):
         context = super(About, self).get_context_data(**kwargs)

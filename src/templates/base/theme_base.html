@@ -51,6 +51,9 @@
             {% else %}
 	            <a class="nav_btn normDecorA" href="{% url 'acct_login' %}">管理登录</a>
             {% endif %}
+            {% if is_mobile %}
+            	<a class="nav_btn normDecorA" href="?change_view_mode=mobile">切换手机版</a>
+            {% endif %}
 		</div>
         <div class="copyright enFont fltrt">
         	<span>Designed by <b><i>Danny</i></b> | Copyright 2012 - 2014 <b><i>DannyWork</i> Project</span></b>

@@ -1,0 +1,32 @@
+{% load widget_tweaks %}
+
+<div class="cmtInputBox textCenter bg1">
+	<div class="cmtFormTitle textCenter">
+        <span class="fs24">您来留言</span>
+    </div>
+    <div clsss="bg2" id="info" style="display: none;"></div>
+    <div class="bg1" id="cmt_form_box">
+        <form action="{% url 'blog_comment' blog.id %}" method="post" id="comment_form">
+        	{% csrf_token %}
+            <div class="inputBox">
+                {{ form.user_name|attr:"class:xnorminput"|attr:"placeholder:您的称呼" }}
+            </div>
+            <div class="inputBox">
+                {{ form.user_email|attr:"class:xnorminput"|attr:"placeholder:您的邮箱" }}
+            </div>
+            <div class="inputBox">
+                {{ form.user_url|attr:"class:xnorminput"|attr:"placeholder:您的个人网址" }}
+            </div>
+            <div class="inputBox avatarBox">
+                {{ form.captcha }}
+            </div>
+            <div class="textAreaBox">
+                {{ form.comment|attr:"class:xnormtextarea"|attr:"placeholder:期待您的留言"|attr:"rows:5" }}
+            </div>
+            <div class="submitBox textRight" id="cmt_submit_box">
+            	{{ form.related }}
+                <input class="normBtn" type="submit" id="comment_form_submit" value="提交" />
+            </div>
+        </form>
+    </div>
+</div>

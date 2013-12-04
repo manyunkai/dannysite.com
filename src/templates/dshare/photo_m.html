@@ -1,0 +1,18 @@
+{% extends "dshare/photo_base_m.html" %}
+{% load staticfiles %}
+
+{% block title %}图片 - DannySite{% endblock %}
+{% block meta_desc %}DannySite图片库，收集来自互联网的美图，在此与大家共赏。DannySite是Danny的个人网站，采用的Python Django框架开发而成，从兴趣到实践，意在学习、分享与记录。技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}
+{% block meta_keywords %}美图,壁纸,风景,明星,生活,个人网站,图片库,分享{% endblock %}
+
+{% block inner_extra_js %}
+	<script src="{% static 'site/v3/js/photo_handler_m.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+    <div class="photoBox"></div>
+    <div class="clearfloat"></div>
+	<div class="getMore bg1 textCenter" style="display: none;">
+		<span>查看更多</span>
+	</div>
+{% endblock %}

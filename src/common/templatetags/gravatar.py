@@ -14,6 +14,7 @@ import hashlib
 
 from django import template
 from django.templatetags.static import static
+from django.contrib.sites.models import Site
 
 register = template.Library()
 
@@ -28,7 +29,7 @@ class GravatarUrlNode(template.Node):
         except template.VariableDoesNotExist:
             return ''
 
-        default = static('site/v3/img/davatar.png')
+        default = 'http://' + Site.objects.get_current().domain + static('site/v3/img/davatar.png')
         size = 128
 
         gravatar_url = "http://www.gravatar.com/avatar/" + hashlib.md5(email.lower()).hexdigest() + "?"

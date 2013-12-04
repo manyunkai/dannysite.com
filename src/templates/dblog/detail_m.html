@@ -1,0 +1,62 @@
+{% extends "dblog/base_m.html" %}
+{% load staticfiles %}
+
+{% block inner_extra_js %}
+	<script src="{% static 'site/v3/js/captcha.js' %}" type="text/javascript"></script>
+	<script src="{% static 'site/v3/js/comment.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+{% block title %}{{ blog.title }} - 博客详情 - DannySite{% endblock %}
+{% block meta_desc %}{{ blog.title }}: {{ blog.content|striptags|truncatechars:100 }}{% endblock %}
+{% block meta_keywords %}{{ blog.tag_list|join:"," }}{% endblock %}
+
+{% block container %}
+	<div class="actionBox bg1">
+    	<a class="actBtn textCenter fltlft" id="search_btn"><img src="{% static 'site/v3/img/search.png' %}" height="80px"></a>
+        <a class="actBtn textCenter fltlft" id="cat_btn"><img src="{% static 'site/v3/img/category.png' %}" height="80px"></a>
+        <br class="clearfloat" />
+        <div class="menuBox bg1" style="display: none;">
+        	{% for cate in categories %}
+        		<a class="blueA menuBtn textCenter" href="{% url 'blog_home' %}?cat={{ cate.id }}">{{ cate.name }}</a>
+            {% endfor %}
+        </div>
+        <div class="searchBox bg1 textCenter" style="display: none;">
+            <form action="" method="get" id="search_form">
+                <input class="xnorminput" id="search" name="search" type="text" placeholder="搜索博客" />
+            </form>
+        </div>
+    </div>
+	{% include "dblog/includes/blogbox_m.html" %}
+	{% with comments|length as len %}
+		{% if len %}
+    		<div class="cmtBox">
+	        	<div class="cmtTitle textCenter">
+	            	<span>有<span id="cmt_count">{{ len }}</span>条留言</span>
+	            </div>
+	            {% for comment in comments %}
+	            	{% include "dblog/includes/cmtdisplaybox_m.html" %}
+	            {% endfor %}
+    		</div>
+    	{% endif %}
+    {% endwith %}
+    {% include "dblog/includes/cmtformbox_m.html" %}
+{% endblock %}
+
+{% block popup %}
+	<div class="popupBox" style="display: none;">
+		<div class="popupLayout"></div>
+		<div class="errorMessage">
+			<div class="mainBox">
+		        <div class="errorTitle fs24">
+		            <span id="error_title"></span>
+		  		</div>
+		        <div class="errorDetail fs16">
+		        	<span id="error_msg"></span>
+		        </div>
+		        <div class="btnBox textRight">
+		        	<button class="writeBtn" id="error_confirm">确定</button>
+		        </div>
+		    </div>
+		</div>
+	</div>
+{% endblock %}

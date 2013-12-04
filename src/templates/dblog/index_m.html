@@ -1,0 +1,53 @@
+{% extends "dblog/base_m.html" %}
+{% load staticfiles %}
+
+{% block title %}{% if filter %}与 {{ filter}} 相关的{% endif %}博客 - DannySite{% endblock %}
+
+{% block meta_desc %}DannySite博客，记录学习笔记、心得以及生活点滴，技术专注于Python与前端开发，包括Python、Django、HTML、CSS、JavaScript、Redis、Linux等。{% endblock %}
+
+{% block inner_extra_js %}
+<script src="{% static 'site/v3/js/highlighter.js' %}"></script>
+<script>
+	(function($){
+		$.getUrlParam = function(name){
+			var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			var r = window.location.search.substr(1).match(reg);
+			if (r!=null) return unescape(r[2]); return null;
+		}
+	})(jQuery);
+	$(document).ready(function(){
+		key = $.getUrlParam('search');
+		if (key){
+			var hl = new Highlighter();
+			nodes = $('.contentBox').find('p');
+			for (var i=0; i < nodes.length;i++){
+			    hl.highlight(nodes[i], key);  
+			}
+		}
+	});
+</script>
+{% endblock %}
+
+{% block container %}
+    <div class="actionBox bg1">
+    	<a class="actBtn textCenter fltlft" id="search_btn"><img src="{% static 'site/v3/img/search.png' %}" height="80px"></a>
+        <a class="actBtn textCenter fltlft" id="cat_btn"><img src="{% static 'site/v3/img/category.png' %}" height="80px"></a>
+        <br class="clearfloat" />
+        <div class="menuBox bg1" style="display: none;">
+        	{% for cate in categories %}
+        		<a class="blueA menuBtn textCenter" href="{% url 'blog_home' %}?cat={{ cate.id }}">{{ cate.name }}</a>
+            {% endfor %}
+        </div>
+        <div class="searchBox bg1 textCenter" style="display: none;">
+            <form action="" method="get" id="search_form">
+                <input class="xnorminput" id="search" name="search" type="text" placeholder="搜索博客" />
+            </form>
+        </div>
+    </div>
+	{% for blog in blogs %}
+		{% include "dblog/includes/blogbox_m.html" %}
+	{% endfor %}
+	{% if page_instance.has_other_pages %}
+		{% include "dblog/includes/paginator_m.html" %}
+	{% endif %}
+{% endblock %}

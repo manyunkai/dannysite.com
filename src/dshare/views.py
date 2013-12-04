@@ -90,7 +90,23 @@ image_boxes_2 = {
 
 class GetPhotoHome(BaseView):
     template_name = 'dshare/photo.html'
+    template_name_m = 'dshare/photo_m.html'
     rows_per_page = 10
+    page_size = 24
+    section_size = 240
+
+    def get_session_key(self):
+        return 'share:photo_list'
+
+    def get_template_names(self):
+        if self.request.session.get('VIEW_MODE') == 'mobile':
+            return [self.template_name_m]
+        return [self.template_name]
+
+    def get_loader(self, photos):
+        def loader(offset, num):
+            return photos[offset:offset + num]
+        return loader
 
     def generate_row(self):
         result = []
@@ -142,6 +158,17 @@ class GetPhotoHome(BaseView):
 
     def get(self, request):
         photos = Photo.objects.all().order_by('created')
+
+        if request.is_ajax() and request.session.get('VIEW_MODE') == 'mobile':
+            paginator = Paginator(self.get_loader(photos), self.page_size,
+                                  self.section_size, photos.count())
+            page_instance = paginator.page(request, self.get_session_key())
+            data = {
+                'items': [os.path.basename(photo.image.name) for photo in page_instance.page_items],
+                'has_next': page_instance.has_next()
+            }
+            return JsonResponse(status=1, data=data)
+
         on_tops = photos.filter(on_top=True)
         if on_tops.exists():
             top_photo = random.choice(on_tops)
@@ -172,6 +199,8 @@ class GetPhotoHome(BaseView):
 class GetShareHome(BaseView):
     template_name = 'dshare/interests.html'
     template_name_ajax = 'dshare/includes/inbox.html'
+    template_name_m = 'dshare/interests_m.html'
+    template_name_m_ajax = 'dshare/includes/inbox_m.html'
     page_size = 10
     section_size = 30
 
@@ -185,7 +214,12 @@ class GetShareHome(BaseView):
 
     def get_template_names(self):
         if self.request.is_ajax():
-            return [self.template_name_ajax]
+            if self.request.session.get('VIEW_MODE') == 'mobile':
+                return [self.template_name_m_ajax]
+            return [self.template_name_m_ajax]
+        print self.request.session.get('VIEW_MODE')
+        if self.request.session.get('VIEW_MODE') == 'mobile':
+            return [self.template_name_m]
         return [self.template_name]
 
     def get(self, request):

@@ -1,0 +1,44 @@
+{% extends "base/theme_base_m.html" %}
+{% load staticfiles %}
+
+{% block extra_link %}
+	<link href="{% static 'site/v3/css/blog_m.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'syntaxhighlighter/css/shCore.css' %}" type="text/css" rel="stylesheet">
+	<link href="{% static 'syntaxhighlighter/css/shThemeDefault.css' %}" type="text/css" rel="stylesheet">
+	<link rel="alternate" type="application/rss" title="DannySite博客" href="{% url 'blog_rss' %}" />
+	{% block inner_extra_link %}{% endblock %}
+{% endblock %}
+
+{% block extra_js %}
+	<script src="{% static 'site/v3/js/jquery-1.8.2.min.js' %}"></script>
+	<script src="{% static 'site/v3/js/placeholder.js' %}"></script>
+	<script src="{% static 'syntaxhighlighter/js/XRegExp.js' %}" type="text/javascript"></script>
+	<script src="{% static 'syntaxhighlighter/js/shCore.js' %}" type="text/javascript"></script>
+	<script src="{% static 'syntaxhighlighter/js/shAutoloader.js' %}" type="text/javascript"></script>
+	<script src="{% static 'site/v3/js/syntaxhighlighter_autoloads.js' %}" type="text/javascript"></script>
+	<script>
+		$(document).ready(function(){
+			$.fn.placeholder();
+		})
+	</script>
+	<script>
+	$(document).ready(function(e) {
+		$('#search_btn').toggle(function(){
+			$('.searchBox').slideDown();
+			$('.menuBox').slideUp();
+		}, function(){
+			$('.searchBox').slideUp();
+		});
+		
+		$('#cat_btn').toggle(function(){
+			$('.menuBox').slideDown();
+			$('.searchBox').slideUp();
+		}, function(){
+			$('.menuBox').slideUp();
+		});
+    });
+</script>
+	{% block inner_extra_js %}{% endblock %}
+{% endblock %}
+
+{% block nav_2 %}focus{% endblock %}

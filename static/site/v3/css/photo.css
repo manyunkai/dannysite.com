@@ -46,6 +46,7 @@
 .descBox .photoDesc {
 	position: absolute;
 	bottom: 26px;
+	width: 222px;
 }
 .themeTitle {
 	padding-bottom: 31px;

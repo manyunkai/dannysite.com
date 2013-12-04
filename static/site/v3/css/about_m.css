@@ -1,0 +1,72 @@
+@charset "utf-8";
+.themeBox {
+	margin-top: 3em;
+}
+.aboutTitle {
+	color: #FFF;
+	background-color: #1d8dcd;
+	padding-top: .75em;
+	padding-bottom: .75em;
+	font-size: 3em;
+}
+.aboutTxt {
+	font-size: 2.3em;
+}
+.aboutTxt span {
+	display: block;
+	padding: 1em 1em;
+}
+.contactNotice {
+	padding: 1em 1em;
+	font-size: 2.3em;
+}
+.imTools .imItem {
+	padding-bottom: 2em;
+}
+.imTools .imItem img {
+	vertical-align: middle;
+	padding-right: 1.5em;
+}
+.imTools .imItem a {
+	display: inline-block;
+	width: 13em;
+	font-size: 2.3em;
+	vertical-align: middle;
+	text-align: left;
+}
+#contact_form_box {
+	padding-top: 2em;
+	padding-bottom: 1em;
+}
+#contact_form_box .inputBox {
+	position: relative;
+}
+#contact_form_box .xnorminput {
+	width: 80%;
+}
+#contact_form_box .xsmallinput {
+	width: 80%;
+}
+#contact_form_box .xnormtextarea {
+	width: 80%;
+	max-width: 80%;
+}
+#contact_form_box input {
+	margin-bottom: .7em;
+}
+#contact_form_box #captcha {
+	position: absolute;
+	right: 8%;
+	margin-top: 1.4em;
+}
+#contact_form_box #captcha img {
+	border: 0;
+	height: 5em;
+	width: auto !important;
+}
+#contact_form_box #contact_submit_box {
+	padding-top: 2em;
+}
+#contact_form_box #contace_form_submit {
+	width: 87.5%;
+}

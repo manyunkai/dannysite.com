@@ -85,3 +85,6 @@
 	display: block;
 	padding: 10px 0px;
 }
+.themeTitle span {
+	padding-right: 8px;
+}

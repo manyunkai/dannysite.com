@@ -1,0 +1,57 @@
+@charset "utf-8";
+.inBox {
+	margin-top: 4em;
+}
+.inTitle {
+	font-size: 3.2em;
+	padding: .5em 1em;
+}
+.c049ff1 {
+	background-color: #049ff1;
+}
+.gameDecorA {
+	color: #5e5e5e;
+	text-decoration: none;
+}
+.gameDecorA:hover {
+	color: #049ff1;
+}
+.gameBox {
+	border-top-width: 3px;
+	border-top-style: solid;
+	border-top-color: #049ff1;
+}
+.c43a102 {
+	background-color: #43a102;
+}
+.mediaBox {
+	border-top-width: 3px;
+	border-top-style: solid;
+	border-top-color: #43a102;
+}
+.mediaDecorA {
+	color: #5e5e5e;
+	text-decoration: none;
+}
+.mediaDecorA:hover {
+	color: #43a102;
+}
+.cff9900 {
+	background-color: #ff9900;
+}
+.letterBox {
+	border-top-width: 3px;
+	border-top-style: solid;
+	border-top-color: #ff9900;
+}
+.letterDecorA {
+	color: #5e5e5e;
+	text-decoration: none;
+}
+.letterDecorA:hover {
+	color: #ff9900;
+}
+.inDesc {
+	font-size: 2.3em;
+	padding: .5em 0em .1em 0em;
+}

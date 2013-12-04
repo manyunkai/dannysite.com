@@ -12,7 +12,6 @@
 	position: relative;
 	*position: static;
 }
-
 .timeBox {
 	width: 75px;
 	color: #FFF;
@@ -22,7 +21,6 @@
 	margin-top: -36px;
 	*margin-top: 0px;
 }
-
 .timeBox #time_day {
 	display: block;
 	height: 38px;

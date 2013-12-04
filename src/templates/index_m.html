@@ -1,0 +1,56 @@
+{% extends "base/theme_base_m.html" %}
+{% load staticfiles %}
+
+{% block nav_1 %}focus{% endblock %}
+
+{% block extra_link %}
+	<link href="{% static 'site/v3/css/index_m.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+<body>
+
+{% block container %}
+    <div class="normBox bg1">
+    	<div class="themeTitle textCenter">
+        	<span class="title">MY AVATAR</span>
+        </div>
+        <div class="cover">
+        	<img src="{% static 'site/v3/img/4458928.jpg' %}" width="100%">
+        </div>
+        <div class="content">
+        	<p>截取自于电影《蛮童之歌》（Boy A）的海报。</p>
+            <p>电影剧情独特而沉重，意在讲述到底是知错能改善莫大焉，还是江山易改本性难移？<br>
+主人公 Jack 的扮演者 Andrew Garfield 演绎的也非常到位。</p>
+			<p>从剧情立意，到扮演者的精彩演绎，都让我印象深刻。</p>
+        </div>
+    <!-- end .normBox --></div>
+    <div class="normBox bg1">
+    	<div class="themeTitle textCenter">
+        	<span class="title">我的博客</span>
+        </div>
+        <div class="blogList">
+        	<ul>
+        		{% for blog in latest_blogs %}
+            		<li class="listItem textCenter"><a class="blueA" href="{% url 'blog_detail' blog.id %}">{{ blog.title|truncatechars:30 }}</a></li>
+            	{% endfor %}
+            	<li class="listItem textCenter bg2"><a class="blueA" href="{% url 'blog_home' %}">进入博客主页</a></li>
+            </ul>
+        </div>
+   <!-- end .normBox --></div>
+   <div class="normBox">
+    	<div class="themeTitle textCenter">
+        	<span class="title">最新上传</span>
+        </div>
+        <div class="topImgs">
+        	<div class="posRela">
+            	<img src="{{ MEDIA_URL }}images/photos/s500/{{ photos.0 }}" width="100%">
+                <div id="photo_desc_layout"></div>
+                <div id="photo_desc_txt">
+                    <span id="photo_title">{{ latest_photo.title }}</span>
+                    <span id="photo_author">{{ latest_photo.author }}</span>
+                    <span id="photo_desc">{{ latest_photo.description|truncatechars:120 }}</span>
+                </div>
+            </div>
+        </div>
+   <!-- end .normBox --></div>
+{% endblock %}

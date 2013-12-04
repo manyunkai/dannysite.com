@@ -1,0 +1,10 @@
+@charset "utf-8";
+.photoBox {
+	margin-top: 3em;
+}
+.photoBox img {
+	width: 33.3%;
+	height: auto !important;
+	border: 0;
+	float: left;
+}

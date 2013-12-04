@@ -1,0 +1,261 @@
+@charset "utf-8";
+@-ms-viewport {
+    width: 1000px;
+}
+@viewport {
+	width: 1000px;
+}
+html {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+body {
+	min-height: 100%;
+	height: auto !important;
+	height: 100%;
+	font-family: DengXian, 'Microsoft Yahei', Tahoma, Arial, Helvetica, Simsun, STHeiti;
+	background-color: #FFFFFF;
+	color: #5e5e5e;
+	margin: 0;
+	padding: 0;
+    -webkit-text-size-adjust: none;
+    -ms-text-size-adjust: none;
+    position: relative;
+}
+ul, ol, dl {
+	padding: 0;
+	margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+	margin-top: 0;
+	padding-right: 1em;
+	padding-left: 1em;
+}
+.container {
+	width: 100%;
+	min-width: 320px;
+	background-color: #FFF;
+	margin: 0 auto;
+	padding-bottom: 400px;
+}
+.content ul, .content ol { 
+	padding: 0 15px 15px 40px;
+}
+.fltrt {
+	float: right;
+}
+.fltlft {
+	float: left;
+}
+.clearfloat {
+	clear:both;
+	height:0;
+	font-size: 1px;
+	line-height: 0px;
+}
+.enFont {
+	font-family: Arial, Helvetica, Simsun, STHeiti;
+}
+.bg1 {
+	background-color: #f9f9f9;
+}
+.bg2 {
+	background-color: #eeeeee;
+}
+.normDecorA {
+	color: #5e5e5e;
+	text-decoration: none;
+}
+.normDecorA:hover {
+	color: #1d8dcd;
+	text-decoration: none;
+}
+.blueA {
+	color: #1d8dcd;
+	text-decoration: none;
+}
+.blueA:hover {
+	color: #f39800;
+}
+.logo {
+	padding: 3.5em 0em;
+}
+.logo img {
+	border: 0;
+}
+.textCenter {
+	text-align: center;
+}
+.nav .nav_btn {
+	font-size: 2.8em;
+	width: 25%;
+	display: inline-block;
+	padding: 1.2em 0em;
+	text-decoration: none;
+	float: left;
+	color: #5e5e5e;
+}
+.nav {
+	border-top-width: 2px;
+	border-top-style: solid;
+	border-top-color: #eeeeee;
+	border-bottom-width: 2px;
+	border-bottom-style: solid;
+	border-bottom-color: #eeeeee;
+}
+.nav .focus {
+	background-color: #eeeeee;
+	color: #1d8dcd;
+}
+.content {
+	font-size: 2.3em;
+	padding: .75em 0em .1em 0em;
+}
+input, textarea {
+	-webkit-appearance:none;
+}
+.xnorminput {
+	padding: 1em;
+	font-size: 2.3em;
+	border: 2px solid #eeeeee;
+	font-family: DengXian, 'Microsoft Yahei', Tahoma, Arial, Helvetica, Simsun, STHeiti;
+}
+.xsmallinput {
+	padding: 1em;
+	font-size: 2.3em;
+	border: 2px solid #eeeeee;
+	font-family: DengXian, 'Microsoft Yahei', Tahoma, Arial, Helvetica, Simsun, STHeiti;
+}
+.xnormtextarea {
+	padding: 1em;
+	font-size: 2.3em;
+	border: 2px solid #eeeeee;
+	font-family: DengXian, 'Microsoft Yahei', Tahoma, Arial, Helvetica, Simsun, STHeiti;
+}
+.normBtn {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	color: #FFF;
+	font-size: 2.3em;
+	font-family: DengXian, 'Microsoft Yahei', Tahoma, Arial, Helvetica, Simsun, STHeiti;
+	background-color: #f39800;
+	cursor: pointer;
+	padding: 1em 2em;
+	-webkit-appearance:none;
+}
+.writeBtn {
+	width: 8em;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	color: #1d8dcd;
+	font-size: 2.3em;
+	font-family: DengXian, 'Microsoft Yahei', Tahoma, Arial, Helvetica, Simsun, STHeiti;
+	background-color: #fff;
+	cursor: pointer;
+	padding: .5em 0em;
+}
+.listItem {
+	width: 100%;
+	padding: 1.2em 0em;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: #eeeeee;
+	font-size: 2.3em;
+}
+.listItem a {
+	text-decoration: none;
+}
+.pageItem {
+	font-size: 2.3em;
+	color: #5e5e5e;
+	text-decoration: none;
+	background-color: #f9f9f9;
+	display: inline-block;
+	padding: 1em 0em;
+	margin: 0em 0em;
+	width: 2.3em;
+	text-align: center;
+}
+.pageItem:hover {
+	background-color: #eeeeee;
+}
+.pageItemFocus {
+	background-color: #eeeeee;
+	color: #1d8dcd;
+}
+.footer {
+	margin-top: 3.5em;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+}
+.navBottom {
+	border-top-color: #eeeeee;
+	border-top-style: solid;
+	border-top-width: 2px;
+	border-bottom-color: #eeeeee;
+	border-bottom-style: solid;
+	border-bottom-width: 2px;
+}
+.navBottom .nav_btn {
+	font-size: 2.8em;
+	width: 50%;
+	display: inline-block;
+	padding: 1.2em 0em;
+	text-decoration: none;
+	float: left;
+	color: #5e5e5e;
+}
+.copyright {
+	font-size: 2em;
+	padding: 1.5em 0em 1.5em 0em;
+}
+.popupLayout {
+	background-color: #CCC;
+	filter: alpha(opacity=30);
+	-moz-opacity: 0.3;
+	opacity: 0.3;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 9999;
+}
+.errorMessage {
+	width: 100%;
+	height: 400px;
+	margin-top: -250px;
+	position: fixed;
+	top: 50%;
+	color: #FFF;
+	background-color: #1d8dcd;
+	z-index: 10000;
+}
+.errorMessage .mainBox {
+	text-align: center;
+	width: 90%;
+	margin-right: auto;
+	margin-left: auto;
+}
+.errorMessage .mainBox .errorTitle {
+	font-size: 3.5em;
+	padding-top: .5em;
+}
+.errorMessage .mainBox .errorDetail {
+	font-size: 2.3em;
+	padding-top: 1em;
+	height: 3.4em;
+	overflow: hidden;
+}
+.getMore {
+	font-size: 2.3em;
+	padding: 1em 1em;
+	margin-top: 1em;
+	color: #1d8dcd;
+}

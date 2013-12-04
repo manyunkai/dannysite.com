@@ -1,0 +1,19 @@
+{% load gravatar %}
+
+<div class="comment bg2" id="cmt_box_{{ comment.id }}">
+    <div class="commentatorInfo bg2">
+        <div class="fltlft">
+            <img class="ctavatar" src="{% gravatar_url comment.user_email %}" width="128" height="128">
+        </div>
+        <div class="fltlft">
+            <span class="cmtInfo"><a class="blueA commentator" href="#" data-id="{{ comment.id }}" title="点击回复TA的留言">{{ comment.user_name }}</a> 发表于 {{ comment.submit_date|date:"Y-n-j g:i" }}</span>
+        </div>
+        <div class="clearfloat"></div>
+    </div>
+    <div class="cmtContent bg1">
+        <span>{{ comment.comment|linebreaks }}</span>
+    </div>
+    {% for reply in comment.get_replys %}
+	    {% include "dblog/includes/replydisplaybox_m.html" %}
+    {% endfor %}
+</div>

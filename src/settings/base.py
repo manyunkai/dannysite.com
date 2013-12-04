@@ -101,12 +101,24 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'core.context_processors.device_info',
+)
+
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'core.middleware.BrowserCheckingMiddleware',
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
@@ -295,15 +307,15 @@ SHARE_IMAGE_CONF = {
     'limits': {
         'formats': ['.jpg', '.gif', 'jpeg', '.bmp', '.png'],
         'max_file_size': 10 * 1024 * 1024,
-        'min_image_size': (960, 300)
+        'min_image_size': (950, 280)
     },
     'origin': {
         'dir': os.path.join(SHARE_IMAGE_ROOT)
     },
     'dims': {
         'normal': {
-            'action': 'crop',
-            'size': (960, 300),
+            'action': 'scale',
+            'size': (950, 0),
             'dir': os.path.join(MEDIA_ROOT, SHARE_IMAGE_ROOT),
             'quality': 100
         }

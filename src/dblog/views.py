@@ -43,6 +43,7 @@ class BlogBase(BaseView):
 
 class GetHome(BlogBase):
     template_name = 'dblog/index.html'
+    template_name_m = 'dblog/index_m.html'
     page_size = 5
     section_size = 10
 
@@ -53,6 +54,11 @@ class GetHome(BlogBase):
         def loader(offset, num):
             return blogs[offset:offset + num]
         return loader
+
+    def get_template_names(self):
+        if self.request.session.get('VIEW_MODE') == 'mobile':
+            return [self.template_name_m]
+        return [self.template_name]
 
     def get_queryset(self, cate_id, tag_id, q):
         if cate_id:
@@ -130,6 +136,7 @@ class GetHome(BlogBase):
 
 class GetDetail(BlogBase, AccessAuthMixin):
     template_name = 'dblog/detail.html'
+    template_name_m = 'dblog/detail_m.html'
     max_recommended_count = 8
 
     def get_context_data(self, extra_context):
@@ -137,9 +144,16 @@ class GetDetail(BlogBase, AccessAuthMixin):
         context['form'] = CommentForm()
         return context
 
+    def get_template_names(self):
+        if self.request.session.get('VIEW_MODE') == 'mobile':
+            return [self.template_name_m]
+        return [self.template_name]
+
     def get_recommends(self, curr):
         return Blog.objects.filter(Q(tags__in=curr.tags.all()) |
-                                   Q(cate=curr.cate)).exclude(id=curr.id).distinct()[:self.max_recommended_count]
+                                   Q(cate=curr.cate),
+                                   is_draft=False,
+                                   is_published=True).exclude(id=curr.id).distinct()[:self.max_recommended_count]
 
     def get(self, request, bid):
         try:
@@ -150,7 +164,7 @@ class GetDetail(BlogBase, AccessAuthMixin):
         blog.click(self.get_client_ip(request))
         blog.tag_list = [tag.name for tag in blog.tags.all()]
 
-        relates = blog.topic.blog_set.exclude(id=blog.id) if blog.topic else []
+        relates = blog.topic.blog_set.filter(is_draft=False, is_published=True).exclude(id=blog.id) if blog.topic else []
 
         extra_context = {
             'blog': blog,
@@ -166,6 +180,8 @@ class Comment(FormView, AccessAuthMixin):
     http_method_names = ['post']
     template_name_comment = 'dblog/includes/cmtdisplaybox.html'
     template_name_reply = 'dblog/includes/replydisplaybox.html'
+    template_name_comment_m = 'dblog/includes/cmtdisplaybox_m.html'
+    template_name_reply_m = 'dblog/includes/replydisplaybox_m.html'
 
     def post(self, request, bid, *args, **kwargs):
         try:
@@ -175,6 +191,16 @@ class Comment(FormView, AccessAuthMixin):
 
         return super(Comment, self).post(request, *args, **kwargs)
 
+    def get_template_name(self, is_related):
+        if is_related:
+            if self.request.session.get('VIEW_MODE') == 'mobile':
+                return self.template_name_reply_m
+            return self.template_name_reply
+        else:
+            if self.request.session.get('VIEW_MODE') == 'mobile':
+                return self.template_name_comment_m
+            return self.template_name_comment
+
     def form_valid(self, form):
         comment = form.save(self.blog, self.get_client_ip(self.request),
                             get_current_site(self.request))
@@ -182,11 +208,10 @@ class Comment(FormView, AccessAuthMixin):
         self.blog.comment_count = F('comment_count') + 1
         self.blog.save()
 
+        self.template_name = self.get_template_name(comment.related)
         if comment.related:
-            self.template_name = self.template_name_reply
             context = {'reply': comment}
         else:
-            self.template_name = self.template_name_comment
             context = {'comment': comment}
 
         html = self.render_to_response(context)

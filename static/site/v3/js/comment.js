@@ -79,7 +79,8 @@ $(document).ready(function(e) {
 	submit_btn.bind('click', form_submit);
 	
 	$('.commentator').live('click', function(){
-		$('#info').append('<a class="blueA">正在回复来自 ' + $(this).text() + ' 的留言</a>（<a class="blueA" id="reply_cancel" href="#">取消</a>）');
+		$('#info').empty();
+		$('#info').append('<a class="blueA">正在回复来自 ' + $(this).text() + ' 的留言</a>（<a class="blueA" id="reply_cancel" href="#">取消</a>）').slideDown();
 		$('#id_related').val($(this).attr('data-id'));
 		$('html, body').animate({scrollTop: $('.cmtInputBox')[0].offsetTop - 80}, 500);
 		return false;
@@ -88,7 +89,7 @@ $(document).ready(function(e) {
 	$('#reply_cancel').live('click', function(){
 		$('#id_related').val('');
 		form[0].reset();
-		$('#info').empty();
+		$('#info').empty().slideUp();;
 		return false;
 	})
 });
