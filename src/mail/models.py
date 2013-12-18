@@ -7,6 +7,7 @@ DannyWork Project
 '''
 
 import datetime
+from hashlib import md5
 
 from django.db import models, transaction
 from django.conf import settings
@@ -102,6 +103,7 @@ class EmailWaiting(models.Model):
 
     from_site = models.ForeignKey(Site, null=True, blank=True)
 
+    sn = models.CharField(max_length=32)
     created = models.DateTimeField(u'创建时间', auto_now=True)
     is_sent = models.BooleanField(u'投递状态', default=False)
 
@@ -111,6 +113,18 @@ class EmailWaiting(models.Model):
         db_table = 'mail_waiting'
         verbose_name = u'邮件投递'
         verbose_name_plural = u'邮件投递'
+
+    def _gen_sn(self):
+        s = '&'.join([str(self.related_object_content_type),
+                      str(self.related_object_object_id),
+                      self.email_addresses,
+                      str(self.created)])
+        return md5(s).hexdigest()
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.sn = self._gen_sn()
+        super(EmailWaiting, self).save(*args, **kwargs)
 
     def mark_sent(self):
         self.is_sent = True
@@ -176,6 +190,21 @@ class EmailWaiting(models.Model):
         text, html = self.render(context, unicode(current_site.domain),
                                  settings.EMAIL_CONFIRMATION_MESSAGE,
                                  settings.EMAIL_CONFIRMATION_HTML)
+
+        return subject, text, html
+
+    def _pack_d_comment(self, email):
+        context = {
+            'comment': self.related_object,
+            'sn': self.sn
+        }
+        print context, self, self.sn, self.sn
+        current_site = self.get_site()
+        subject = settings.EMAIL_CMT_REPLY_SUBJECT
+
+        text, html = self.render(context, unicode(current_site.domain),
+                                 settings.EMAIL_CMT_REPLY_MESSAGE,
+                                 settings.EMAIL_CMT_REPLY_HTML)
 
         return subject, text, html
 

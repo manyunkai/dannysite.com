@@ -273,6 +273,9 @@ EMAIL_CONFIRMATION_HTML = ''
 PASSWD_RESET_SUBJECT = u'DannySite 密码重置'
 PWD_RESET_MSG = 'password_reset.txt'
 PWD_RESET_HTML = ''
+EMAIL_CMT_REPLY_SUBJECT = u'您在DannySite的留言有了新的回复'
+EMAIL_CMT_REPLY_MESSAGE = 'mail_reply.txt'
+EMAIL_CMT_REPLY_HTML = 'mail_reply.html'
 
 # Blog
 BLOG_VISITORS_CACHE_KEY = 'blog:{0}:visitors'

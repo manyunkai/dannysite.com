@@ -55,7 +55,7 @@ class BrowserCheckingMiddleware(object):
 
         if not mode:
             for key in ['iphone', 'android', 'iemobile']:
-                if key in request.META.get('HTTP_USER_AGENT').lower():
+                if key in request.META.get('HTTP_USER_AGENT', '').lower():
                     mode = 'mobile'
                     break
             mode = 'desktop' if not mode else mode

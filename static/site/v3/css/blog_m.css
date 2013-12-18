@@ -9,17 +9,17 @@
 	color: #FFF;
 	position: absolute;
 	top: 50%;
-	margin-top: -3.9em;
+	margin-top: -4.8em;
 }
 .timeBox .timeDay {
 	display: block;
 	height: 1.1em;
-	font-size: 4em;
+	font-size: 5em;
 }
 .timeBox .timeMonth {
 	display: block;
 	height: 1.1em;
-	font-size: 2.5em;
+	font-size: 3em;
 }
 .infoBox {
 	width: 85%;
@@ -31,7 +31,7 @@
 	padding-top: 0.3em;
 	padding-bottom: 0.3em;
 	padding-left: 0.5em;
-	font-size: 3.2em;
+	font-size: 3.8em;
 }
 .infoBox .blogCt {
 	padding-top: 0.5em;

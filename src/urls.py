@@ -26,6 +26,7 @@ urlpatterns = patterns('',
     url(r'^interest/', include('dshare.urls.share')),
 
     url(r'^account/', include('account.urls')),
+    url(r'^mail/', include('mail.urls')),
     url(r'^grappelli/', include('grappelli.urls')),
 
     url(r'^sitemap\.xml$', 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps})

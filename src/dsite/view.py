@@ -7,6 +7,7 @@ DannyWork Project
 '''
 
 import os
+import random
 
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
@@ -37,7 +38,7 @@ class Index(TemplateView):
         context['focus'] = focuses[0] if focuses.exists() else None
 
         context['latest_blogs'] = Blog.objects.all()[:5]
-        context['hottest_blogs'] = Blog.objects.all().order_by('-click_count', '-created')[:5]
+        context['hottest_blogs'] = random.sample(Blog.objects.all().order_by('-click_count', '-created')[:15], 5)
         context['hottest_cates'] = Category.objects.all().order_by('-count')[:5]
 
         photos = Photo.objects.all()[:4]

@@ -11,6 +11,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from captcha.fields import CaptchaField
 from core.models import DComment
+from mail.signals import add_mail
 
 
 class CommentForm(forms.ModelForm):
@@ -40,6 +41,8 @@ class CommentForm(forms.ModelForm):
 
         if commit:
             obj.save()
+            if obj.related and obj.related.mail_reply and not obj.user_email == obj.related.user_email:
+                add_mail.send(sender=self, target=obj, email=obj.related.user_email)
 
         return obj
 
