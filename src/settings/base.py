@@ -153,18 +153,20 @@ INSTALLED_APPS = (
     # DannySite specified apps
     'mail',
     'account',
-    # Customed User
-    'user',
-    'core',
-    'dblog',
-    'dsite',
-    'dshare',
 
     # Tools
     'ueditor',
     'captcha',
     'widget_tweaks',
     'common',
+
+    # Customed User
+    'user',
+    'core',
+    'dblog',
+    'dsite',
+    'dshare',
+    'dstore',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -281,6 +283,11 @@ EMAIL_CMT_REPLY_HTML = 'mail_reply.html'
 BLOG_VISITORS_CACHE_KEY = 'blog:{0}:visitors'
 BLOG_VISITORS_CACHE_TIMEOUT = 24 * 60 * 60
 BLOG_IMAGE_URL = 'images/uploads/'
+
+# dstore
+FILESTORE_ROOT = os.path.abspath('../files/')
+FILESTORE_DL_URL = 'http://www.dannysite.com/cloud/dl/'
+FILESTORE_DL_NGINX_REDIRECT = '/files/'
 
 # Image
 LINK_LOGO_ROOT = 'images/link/'

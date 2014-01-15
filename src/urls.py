@@ -24,6 +24,7 @@ urlpatterns = patterns('',
     url(r'^blog/', include('dblog.urls')),
     url(r'^photo/', include('dshare.urls.photo')),
     url(r'^interest/', include('dshare.urls.share')),
+    url(r'^cloud/', include('dstore.urls')),
 
     url(r'^account/', include('account.urls')),
     url(r'^mail/', include('mail.urls')),

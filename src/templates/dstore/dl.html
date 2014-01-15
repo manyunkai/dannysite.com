@@ -1,0 +1,32 @@
+{% extends "base/theme_base.html" %}
+{% load staticfiles %}
+
+{% block title %}下载文件{% endblock %}
+
+{% block extra_link %}
+	<link href="{% static 'site/v3/css/dl.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block container %}
+    <div class="normBox bg1" id="dl_pw_box">
+        <div class="top bg2 fs18 textCenter" id="dl_pw_title">
+        	{% if pw_incorrect %}
+        	    <span>密码错误，请重试</span>
+        	{% else %}
+	            <span>请输入密码以继续</span>
+        	{% endif %}
+        </div>
+        <form id="dl_pw_form" action="{% url 'dstore_dl' node.icode %}" method="post">
+        	{% csrf_token %}
+            <div class="pt26 textCenter" id="dl_pw_form_box">
+                <div class="input_box">
+                    <input class="xnorminput" type="password" id="id_password" name="password" placeholder="密码" />
+                </div>
+                <div class="input_box pt16">
+                	<input class="cubeBtn" type="submit" id="dl_pw_submit" value="验证">
+                </div>
+            </div>
+        </form>
+        </div>
+    <!-- end .normBox --></div>
+{% endblock %}

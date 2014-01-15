@@ -1,0 +1,16 @@
+@charset "utf-8";
+.container {
+	position: absolute;
+	top: 50%;
+	margin-top: -225px;
+}
+#dl_pw_box {
+	width: 541px;
+}
+
+#dl_pw_title {
+	padding: 15px 0px;
+}
+#dl_pw_form {
+	padding-bottom: 36px;
+}
