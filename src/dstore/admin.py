@@ -16,6 +16,7 @@ from django.conf import settings
 
 from dstore.models import Node
 from dstore.forms import FolderForm, FileForm
+from dstore.utils import str_crc32
 
 
 class NodeAdmin(admin.ModelAdmin):
@@ -26,12 +27,10 @@ class NodeAdmin(admin.ModelAdmin):
         if not change:
             obj.owner = request.user
             obj.type = 'D' if request.REQUEST.get('type') == 'folder' else 'F'
-        obj.icode = self.str_crc32('-'.join([obj.name, str(time.time())]))
-        obj.save()
-
         if obj.type == 'F':
             obj.name = os.path.basename(obj.file.name)
-            obj.save()
+        obj.icode = str_crc32('-'.join([obj.name, str(time.time())]))
+        obj.save()
 
     def change_view(self, request, object_id, form_url='', extra_context=None):
         obj = self.get_object(request, unquote(object_id))
@@ -41,9 +40,6 @@ class NodeAdmin(admin.ModelAdmin):
     def add_view(self, request, form_url='', extra_context=None):
         self.form = FolderForm if request.REQUEST.get('type') == 'folder' else FileForm
         return super(NodeAdmin, self).add_view(request, form_url, extra_context)
-
-    def str_crc32(self, txt):
-        return(hex(binascii.crc32(txt.encode('utf8')))[2:])
 
     def render_change_form(self, request, context, *args, **kwargs):
         context['adminform'].form.fields['parent'].queryset = Node.objects.filter(owner=request.user, type='D')

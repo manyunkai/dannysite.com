@@ -6,11 +6,15 @@ Created on 2014-1-15
 DannyWork Project
 '''
 
+import os
+
 from django.db import models
+from django.utils import timezone
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
 from user.models import User
+from dstore.utils import str_crc32
 
 fs = FileSystemStorage(location=settings.FILESTORE_ROOT,
                        base_url=settings.FILESTORE_DL_NGINX_REDIRECT)
@@ -23,12 +27,9 @@ NODE_TYPES = (
 
 
 def doc_upload_to(instance, filename):
-    def get_path(node):
-        if node.parent:
-            return '/'.join([node.name, get_path(node.parent)])
-        return node.name
-
-    return '/'.join([str(instance.owner_id), get_path(instance), filename])
+    return '/'.join([str(instance.owner_id),
+                     timezone.now().strftime('%Y%m%d'),
+                     str_crc32(filename) + os.path.splitext(filename)[1]])
 
 
 class Node(models.Model):

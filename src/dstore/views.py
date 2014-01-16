@@ -21,7 +21,7 @@ class Download(TemplateView):
         response = HttpResponse()
         response['Content-Type'] = 'application/octet-stream'
         response['X-Accel-Redirect'] = node.file.url
-        response['Content-Disposition'] = 'attachment; filename={0}'.format(os.path.basename(node.file.name))
+        response['Content-Disposition'] = 'attachment; filename={0}'.format(os.path.basename(node.name))
         return response
 
     def get(self, request, icode):
