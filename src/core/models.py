@@ -16,7 +16,8 @@ class DCommentManager(CommentManager):
     def get_comments(self, obj):
         try:
             obj_type = ContentType.objects.get_for_model(obj)
-            return self.filter(content_type=obj_type, object_pk=obj.pk, related=None)
+            return self.filter(content_type=obj_type, object_pk=obj.pk,
+                               related=None, is_public=True)
         except:
             return []
 
@@ -29,7 +30,7 @@ class DCommentManager(CommentManager):
 
 class DComment(Comment):
     related = models.ForeignKey('DComment', null=True, blank=True, related_name='related_comment')
-    mail_reply = models.BooleanField(u'½ÓÊÕ»Ø¸´ÓÊ¼þ', default=True)
+    mail_reply = models.BooleanField(u'ï¿½ï¿½ï¿½Õ»Ø¸ï¿½ï¿½Ê¼ï¿½', default=True)
     objects = DCommentManager()
 
     def get_replys(self):
