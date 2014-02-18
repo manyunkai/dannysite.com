@@ -223,7 +223,7 @@ class GetShareHome(BaseView):
         return [self.template_name]
 
     def get(self, request):
-        shares = Share.objects.all()
+        shares = Share.objects.filter(is_published=True)
         paginator = Paginator(self.get_loader(shares), self.page_size,
                               self.section_size, shares.count())
         page_instance = paginator.page(request, self.get_session_key())

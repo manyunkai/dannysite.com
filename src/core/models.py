@@ -30,7 +30,7 @@ class DCommentManager(CommentManager):
 
 class DComment(Comment):
     related = models.ForeignKey('DComment', null=True, blank=True, related_name='related_comment')
-    mail_reply = models.BooleanField(u'���ջظ��ʼ�', default=True)
+    mail_reply = models.BooleanField(u'接收回复邮件', default=True)
     objects = DCommentManager()
 
     def get_replys(self):

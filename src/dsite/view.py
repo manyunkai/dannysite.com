@@ -37,7 +37,7 @@ class Index(TemplateView):
         focuses = Focus.objects.filter(is_shown=True).order_by('?')
         context['focus'] = focuses[0] if focuses.exists() else None
 
-        blogs = Blog.objects.all()
+        blogs = Blog.objects.filter(is_published=True, is_draft=False)
         context['latest_blogs'] = blogs[:5]
         context['hottest_blogs'] = random.sample(Blog.objects.all().order_by('-click_count', '-created')[:15], blogs.count() if blogs.count() < 5 else 5)
         context['hottest_cates'] = Category.objects.all().order_by('-count')[:5]
