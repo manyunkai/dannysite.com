@@ -10,6 +10,10 @@ from django.contrib.comments.models import Comment
 from django.contrib.comments.managers import CommentManager
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
+from django.db.models.expressions import F
+from django.db.models.signals import pre_delete
+
+from dblog.models import Blog
 
 
 class DCommentManager(CommentManager):
@@ -35,3 +39,13 @@ class DComment(Comment):
 
     def get_replys(self):
         return self.related_comment.all()
+
+
+def dcomment_pre_delete(sender, **kwargs):
+    instance = kwargs.get('instance')
+    obj = instance.content_object
+    if isinstance(obj, Blog):
+        obj.comment_count = F('comment_count') - 1
+        obj.save()
+
+pre_delete.connect(dcomment_pre_delete, sender=DComment)
