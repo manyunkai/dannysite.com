@@ -27,9 +27,9 @@ class NodeAdmin(admin.ModelAdmin):
         if not change:
             obj.owner = request.user
             obj.type = 'D' if request.REQUEST.get('type') == 'folder' else 'F'
+            obj.icode = str_crc32('-'.join([obj.name, str(time.time())]))
         if obj.type == 'F':
             obj.name = os.path.basename(obj.file.name)
-        obj.icode = str_crc32('-'.join([obj.name, str(time.time())]))
         obj.save()
 
     def change_view(self, request, object_id, form_url='', extra_context=None):

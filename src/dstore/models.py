@@ -12,9 +12,11 @@ from django.db import models
 from django.utils import timezone
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
+from django.db.models.signals import pre_save, pre_delete
 
 from user.models import User
 from dstore.utils import str_crc32
+from common.log_utils import set_log
 
 fs = FileSystemStorage(location=settings.FILESTORE_ROOT,
                        base_url=settings.FILESTORE_DL_NGINX_REDIRECT)
@@ -53,3 +55,28 @@ class Node(models.Model):
     class Meta:
         verbose_name = u'云盘'
         verbose_name_plural = u'云盘'
+
+
+def node_pre_save(sender, **kwargs):
+    curr = kwargs.get('instance')
+    try:
+        prev = Node.objects.get(id=curr.id)
+    except Node.DoesNotExist:
+        pass
+    else:
+        if not curr.file == prev.file:
+            try:
+                os.remove(prev.file.path)
+            except Exception, e:
+                set_log('error', str(e))
+
+
+def node_pre_delete(sender, **kwargs):
+    instance = kwargs.get('instance')
+    try:
+        os.remove(instance.file.path)
+    except Exception, e:
+        set_log('error', str(e))
+
+pre_save.connect(node_pre_save, sender=Node)
+pre_delete.connect(node_pre_delete, sender=Node)
