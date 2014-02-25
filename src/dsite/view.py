@@ -69,7 +69,7 @@ class Feedback(FormView, AccessAuthMixin):
     http_method_names = ['post']
 
     def form_valid(self, form):
-        fb = form.save()
+        fb = form.save(commit=False)
         fb.ip = self.get_client_ip(self.request)
         fb.save()
 
