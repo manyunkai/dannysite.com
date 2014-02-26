@@ -23,9 +23,8 @@ class UserAdmin(admin.ModelAdmin):
         if not change:
             obj.username = obj.email
             obj.password = User.objects.make_random_password(getattr(settings, 'ACCOUNT_RANDOM_PASSWD_LENGTH', 10))
+            user_signed_up.send(sender=self, user=obj)
         obj.save()
-
-        user_signed_up.send(sender=self, user=obj)
 
     def acct_status(self, user):
         if not user.is_active:
