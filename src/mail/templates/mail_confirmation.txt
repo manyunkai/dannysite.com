@@ -1,0 +1,10 @@
+﻿亲爱的用户：
+	感谢您对Dannyite的支持！
+	您的账户现已生成：
+    	用户名：{{ username }}
+    	密码：{{ password }}
+
+	请点击以下链接立即激活并使用您的账户：
+    	{{ activate_url }}
+
+Dannyite

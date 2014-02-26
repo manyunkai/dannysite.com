@@ -1,12 +1,11 @@
 {% extends "account/base.html" %}
-{% load staticfiles %}
-{% load widget_tweaks %}
+{% load staticfiles widget_tweaks %}
+
+{% block title %}注册 - DannySite{% endblock %}
 
 {% block extra_link %}
-	<link href="{% static 'site/v3/css/login.css' %}" rel="stylesheet" type="text/css">
+	<link href="{% static 'site/v3/css/signup.css' %}" rel="stylesheet" type="text/css">
 {% endblock %}
-
-{% block title %}登录 - DannySite{% endblock %}
 
 {% block inner_extra_js %}
 	<script>
@@ -22,11 +21,10 @@
 				$('.popupBox').fadeOut('fast');
 			});
 		});
-		
-		$(document).ready(function(e) {
-			var captcha = $('#captcha');
-			var form = $('#login_form');
-			var submit_btn = $('#login_submit');
+		 
+		 $(document).ready(function(){
+		 	var form = $('#signup_form');
+			var submit_btn = $('#signup_submit');
 			var submit_status = 0;
 			
 			function form_submit(){
@@ -36,6 +34,7 @@
 				submit_status = 1;
 				$(this).css('background-color', '#eb9300');
 				$(this).text('请稍后...');
+				
 				$.ajax({
 					url: form.attr('action'),
 					type: 'POST',
@@ -44,9 +43,9 @@
 				})
 				.success(function(data){
 					if (data.status){
-						window.location.href = data.redirect;
+						$('.container').html(data.html);
 					} else {
-						errorMsgPopup('登录失败', data.message);
+						errorMsgPopup('注册不成功', data.message);
 					}
 				})
 				.error(function(jqXHR, textStatus) {
@@ -54,40 +53,33 @@
 				})
 				.complete(function(jqXHR, textStatus){
 					submit_btn.css('background-color', '#f39800');
-					submit_btn.text('登录');
+					submit_btn.text('提交');
 					submit_status = 0;
 				});
+
 				return false;
 			}
-			
 			submit_btn.bind('click', form_submit);
-		});
+		 });
 	</script>
 {% endblock %}
 
 {% block container %}
-	<div class="normBox bg1" id="login_box">
-    	<div class="top bg2 fs18 textCenter" id="login_title">
-        	<span>登录以继续您的操作</span>
+	<div class="normBox bg1" id="signup_box">
+        <div class="top bg2 fs18 textCenter" id="signup_title">
+            <span>加入DannySite</span>
         </div>
-        <form id="login_form" action="{% url 'acct_login' %}" method="post">
-        	{% csrf_token %}
-        	<div class="pt26 textCenter" id="login_form_box">
-              	<div class="input_box">
-              		{{ form.email|attr:"class:xnorminput"|attr:"placeholder:账户名" }}
-              	</div>
-              	<div class="input_box pt16">
-              		{{ form.password|attr:"class:xnorminput"|attr:"placeholder:密码" }}
-              	</div>
-                <div class="input_box pt16">
-                	<button class="cubeBtn" type="submit" id="login_submit">登录</button>
+        <form id="signup_form" action="{% url 'acct_signup' %}" method="post">
+            <div class="pt26 textCenter" id="signup_box">
+            	{% csrf_token %}
+                <div class="input_box">
+                	{{ form.email|attr:"class:xnorminput"|attr:"placeholder:输入您的有效邮箱" }}
                 </div>
                 <div class="input_box pt16">
-                    <!--<a href="#" class="fs14 normDecorA">忘记密码？</a>-->
+                	<button class="cubeBtn" type="submit" id="signup_submit">提交</button>
                 </div>
             </div>
         </form>
-        <div class="clearfloat">
         </div>
     <!-- end .normBox --></div>
 {% endblock %}

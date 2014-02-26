@@ -62,17 +62,8 @@ class SignupForm(forms.Form):
         if not value:
             raise forms.ValidationError(u"请填写有效的电子邮箱")
 
-        try:
-            self.email_address = EmailAddress.objects.get(email__iexact=value)
-        except EmailAddress.DoesNotExist:
-            try:
-                User.objects.get(email=value, is_active=True)
-            except User.DoesNotExist:
-                pass
-            else:
-                raise forms.ValidationError(u"该邮箱已被注册")
-        else:
-            if self.email_address.verified:
+        if EmailAddress.objects.filter(user__email__iexact=value, verified=True).exists() or \
+                    User.objects.filter(email__iexact=value, is_active=True).exists():
                 raise forms.ValidationError(u"该邮箱已被注册")
 
         if EmailSentCount.objects.is_max_email_sent_count(value, 'activation'):
@@ -94,7 +85,8 @@ class PasswordResetForm(forms.Form):
         except:
             raise forms.ValidationError(_(u"该账号尚未激活"))
 
-        if EmailSentCount.objects.is_max_email_sent_count(value, 'password'):
+        # 超级用户和管理员不可使用该方法重置密码
+        if self.user.is_superuser or self.user.is_staff or EmailSentCount.objects.is_max_email_sent_count(value, 'password'):
             raise forms.ValidationError(u'该Email已达到今日最大密码重置次数')
         return value
 

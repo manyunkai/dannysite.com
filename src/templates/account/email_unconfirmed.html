@@ -1,0 +1,16 @@
+{% extends "account/base.html" %}
+{% load staticfiles widget_tweaks %}
+
+{% block title %}激活失败 - DannySite{% endblock %}
+
+{% block extra_link %}
+	<link href="{% static 'site/v3/css/signup.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block container %}
+	<div class="normBox textCenter bg1" id="signup_confirm">
+		<span class="fs30">激活失败</span>
+        <span class="fs16">对不起，您的激活码已失效。</span>
+        <span class="fs16">请 <a href="{% url 'acct_signup' %}" class="blueA">点击这里</a> 重新注册。</span>
+	<!-- end .normBox --></div>
+{% endblock %}

@@ -43,7 +43,7 @@ class EmailSendingThread(threading.Thread):
                 self.is_working = True
                 sending_attempt_count = 0
 
-                email = EmailWaiting.objects.get(id=eid)
+                email = EmailWaiting.objects.get(id=int(eid))
                 while True:
                     if not email.send() and sending_attempt_count <= 3:
                         sending_attempt_count += 1

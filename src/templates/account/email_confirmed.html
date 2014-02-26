@@ -1,0 +1,20 @@
+{% extends "account/base.html" %}
+{% load staticfiles widget_tweaks %}
+
+{% block title %}注册成功 - DannySite{% endblock %}
+
+{% block extra_link %}
+	<link href="{% static 'site/v3/css/signup.css' %}" rel="stylesheet" type="text/css">
+{% endblock %}
+
+{% block container %}
+	<div class="normBox textCenter bg1" id="signup_confirm">
+		<span class="fs30">注册成功</span>
+		{% if already_verified %}
+			<span class="fs16">您的帐号已经激活，无需重复操作。</span>
+		{% else %}
+	        <span class="fs16">恭喜！您的帐号已激活并可以正常使用了。</span>
+		{% endif %}
+        <span class="fs16"><a href="{% url 'acct_login' %}?next=/" class="blueA">点击这里立即登录</a></span>
+	<!-- end .normBox --></div>
+{% endblock %}

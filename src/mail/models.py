@@ -22,7 +22,6 @@ from django.utils.http import int_to_base36
 from django.utils.timezone import utc
 
 from user.models import User
-from account.models import EmailAddress
 from mail.signals import add_mail
 from common.log_utils import set_log
 
@@ -151,18 +150,20 @@ class EmailWaiting(models.Model):
     def _pack_passwordreset(self, email):
         user = User.objects.get(email__iexact=email)
         domain = unicode(self.get_site().domain)
-        subject = settings.PASSWD_RESET_SUBJECT
+        subject = settings.EMAIL_PASSWD_RESET_SUBJECT
+        current_site = self.get_site()
 
-        context = {
-            'user': user,
-            'protocol': getattr(settings, 'DEFAULT_HTTP_PROTOCOL', 'http'),
-            'uid': int_to_base36(user.id),
-            'temp_key': self.related_object.temp_key,
-        }
+        url = u'%s://%s%s' % (
+            getattr(settings, 'DEFAULT_HTTP_PROTOCOL', 'http'),
+            unicode(unicode(current_site.domain)),
+            reverse('acct_password_reset_token', args=[int_to_base36(user.id), self.related_object.temp_key])
+        )
+
+        context = {'url': url}
 
         text, html = self.render(context, domain,
-                                 settings.PWD_RESET_MSG,
-                                 settings.PWD_RESET_HTML)
+                                 settings.EMAIL_PWD_RESET_MSG,
+                                 settings.EMAIL_PWD_RESET_HTML)
 
         return subject, text, html
 
@@ -178,14 +179,15 @@ class EmailWaiting(models.Model):
 
         subject = ''.join(settings.EMAIL_CONFIRMATION_SUBJECT.splitlines())
 
-        passwd = User.objects.make_random_password()
-        user = EmailAddress.objects.get(email=email).user
+        user = User.objects.get(email=email)
+        passwd = User.objects.make_random_password(getattr(settings, 'ACCOUNT_RANDOM_PASSWD_LENGTH', 10))
         user.set_password(passwd)
         user.save()
 
         context = {'username': user.username,
                    'password': passwd,
-                   'activate_url': activate_url}
+                   'activate_url': activate_url,
+                   'is_active': user.is_active}
 
         text, html = self.render(context, unicode(current_site.domain),
                                  settings.EMAIL_CONFIRMATION_MESSAGE,

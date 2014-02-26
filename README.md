@@ -24,8 +24,11 @@ DannySite是一个由个人兴趣与学习实践而生的个人网站。网站�
 * django-simple-captcha：一个验证码模块；
 * DjangoUeditor：百度富文本编辑器。为适应个人需求，对View等进行了重新定制。
 
+### 更新
+
+2014-2-24：完成该版本account模块的重构
+
 ### 目前未完善的功能和已知Bugs
 
-* Account: 注册、密码修改、密码重置等template未完成；
 * Ueditor: 上传图片等重写View后未考虑路径传入；
 * Mail: 注册邀请邮件未投递。

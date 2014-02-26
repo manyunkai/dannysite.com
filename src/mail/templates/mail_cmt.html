@@ -1,0 +1,36 @@
+{% load gravatar %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>来自DannySite的评论邮件</title>
+</head>
+
+<body style="font-family: Dengxian, 'Microsoft Yahei', Tahoma, Arial, Helvetica, Simsun, STHeiti; background-color: #FFF; padding: 0; color: #5e5e5e; margin: 0; -ms-text-size-adjust: none;">
+	<div class="header" style="background-color: #f9f9f9; width: 95%; margin-left: auto; margin-right: auto; padding: 20px 20px; border-bottom-width: 2px; border-bottom-style: solid; border-bottom-color: #eeeeee;">
+    	<a href="http://{{ domain }}/"><img src="http://{{ domain }}{{ STATIC_URL }}site/v3/img/LOGO_B.png" width="120" height="20" style="display: block; border: 0; text-align: center;"></a>
+    </div>
+    <div class="container" style="width: 95%; background-color: #FFF; margin: 0 auto; padding: 40px 20px;">
+    	<div class="title" style="background-color: #eeeeee; font-size: 18px; color: #1d8dcd; text-align: center; border-top-width: 2px; border-top-style: solid; border-top-color: #1d8dcd; width: 90%; padding: 15px 0; margin: 0 auto;">
+        	<span>给您的评论</span>
+        </div>
+      	<div class="content" style="background-color: #f9f9f9; padding: 10px 0; width: 90%; margin: 0 auto;">
+            <div class="name" style="padding: 0 30px;">
+              <span id="name" style="display: block; padding: 5px 0; font-size: 16px; margin: 0 auto;">亲爱的{{ blog.author.username }}：</span>
+            </div>
+          <div class="main" style="padding: 0 60px; font-size: 14px;">
+              <span style="display: block; padding: 5px 0;">您的文章 <a href="http://{{ domain }}{% url 'blog_detail' blog.id %}" style="color: #1d8dcd; text-decoration: none;">{{ blog.title }}</a> 收到新的评论：</span>
+              <div class="reply" style="background-color: #eeeeee; margin: 10px 0px;">
+                	<img id="avatar" src="dannysite/img/ctavatar2.png" width="62" height="62" style="display: block; float: left; margin-right: 10px;">
+                    <span id="comment" style="display: block; padding: 5px 0; line-height: 49px;">刺客联盟兄弟会：怎么没有下文了？？？</span>
+                    <div class="clearfloat" style="clear:both; height:0; font-size: 1px; line-height: 0px;"></div>
+              </div>
+              <span style="display: block; padding: 5px 0;"><a href="#" style="color: #1d8dcd; text-decoration: none;">查看详情</a></span>
+          </div>
+        </div>
+	<!-- end .container --></div>
+    <div class="footer" style="font-family: Arial, Helvetica, Simsun, STHeiti; background-color: #f9f9f9; padding: 20px 20px; width: 95%; margin: 0 auto; border-top-width: 2px; border-top-style: solid; border-top-color: #eeeeee; text-align: center; font-size: 12px;">
+        <span>Designed by <b><i>Danny</i></b> | Copyright 2012 - 2014 <b><i>DannyWork</i> Project</span></b>
+    <!-- end .footer --></div>
+</body>
+</html>

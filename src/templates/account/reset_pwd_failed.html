@@ -1,0 +1,29 @@
+{% extends "account/base.html" %}
+{% load staticfiles widget_tweaks %}
+
+{% block title %}重置失败 - DannySite{% endblock %}
+
+{% block extra_link %}
+	<style>
+		.container {
+			position: absolute;
+			top: 50%;
+			margin-top: -200px;
+		}
+		#pwd_reset_info {
+			padding: 15px 0;
+		}
+		#pwd_reset_info span{
+			display: block;
+			padding: 12px 0;
+		}
+	</style>
+{% endblock %}
+
+{% block container %}
+	<div class="normBox textCenter bg1" id="pwd_reset_info">
+		<span class="fs30">无法继续您的操作</span>
+        <span class="fs16">由于您的链接已经失效，无法重置密码。</span>
+        <span class="fs16">请 <a href="{% url 'acct_password_reset' %}" class="blueA">点击这里</a> 重新进行该操作。</span>
+<!-- end .normBox --></div>
+{% endblock %}

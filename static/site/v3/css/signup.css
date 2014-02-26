@@ -1,0 +1,23 @@
+@charset "utf-8";
+.container {
+	position: absolute;
+	top: 50%;
+	margin-top: -220px;
+}
+#signup_box {
+	width: 541px;
+}
+
+#signup_title {
+	padding: 15px 0px;
+}
+#signup_form {
+	padding-bottom: 36px;
+}
+#signup_confirm {
+	padding: 15px 0;
+}
+#signup_confirm span{
+	display: block;
+	padding: 12px 0;
+}

@@ -1,0 +1,6 @@
+<div class="normBox textCenter bg1" id="signup_confirm">
+		<span class="fs30">即将完成注册</span>
+        <span class="fs16">现已向您的注册邮箱（{{ email }}）发送了一封注册确认邮件，</span>
+        <span class="fs16">内含初始密码{% if need_confirm %}和激活链接{% endif %}，请查阅。</span>
+        <span class="fs16">如果未能收到，可以 <a href="{% url 'acct_signup' %}" class="blueA">重复注册流程</a> 或 <a href="{% url 'about' %}#contact" class="blueA">与我联系</a>。</span>
+<!-- end .normBox --></div>

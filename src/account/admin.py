@@ -18,7 +18,7 @@ class PasswordResetAdmin(admin.ModelAdmin):
 
 
 class EmailAddressAdmin(admin.ModelAdmin):
-    list_display = ['user', 'email', 'verified', 'primary']
+    list_display = ['user', 'verified']
 
 
 class SignupCodeAdmin(admin.ModelAdmin):

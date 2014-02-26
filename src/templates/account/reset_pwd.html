@@ -1,0 +1,54 @@
+{% extends "account/base.html" %}
+{% load staticfiles widget_tweaks %}
+
+{% block title %}重置密码 - DannySite{% endblock %}
+
+{% block extra_link %}
+	<style>
+		.container {
+			position: absolute;
+			top: 50%;
+			margin-top: -220px;
+		}
+		#pwd_reset_box {
+			width: 541px;
+		}
+		#pwd_rest_title {
+			padding: 15px 0px;
+		}
+		#pwd_reset_form {
+			padding-bottom: 36px;
+		}
+		#signup_confirm {
+			padding: 15px 0;
+		}
+		#signup_confirm span{
+			display: block;
+			padding: 12px 0;
+		}
+	</style>
+{% endblock %}
+
+{% block inner_extra_js %}
+	<script src="{% static 'site/v3/js/pwd.js' %}"></script>
+{% endblock %}
+
+{% block container %}
+	<div class="normBox bg1" id="pwd_reset_box">
+        <div class="top bg2 fs18 textCenter" id="pwd_rest_title">
+            <span>重置密码</span>
+        </div>
+        <form id="pwd_reset_form" action="{% url 'acct_password_reset' %}" method="post">
+            <div class="pt26 textCenter" id="pwd_reset_box">
+            	{% csrf_token %}
+                <div class="input_box">
+                	{{ form.email|attr:"class:xnorminput"|attr:"placeholder:输入您的注册邮箱" }}
+                </div>
+                <div class="input_box pt16">
+                	<button class="cubeBtn" type="submit" id="pwd_reset_submit">提交</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    <!-- end .normBox --></div>
+{% endblock %}

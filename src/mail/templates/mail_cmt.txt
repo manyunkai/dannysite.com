@@ -1,0 +1,9 @@
+﻿亲爱的{{ comment.related.user_name }}:
+	
+	感谢您对DannySite的支持！
+	您在《正则表达式语法与re模板的简单应用》中发表的评论收到了新的回复，点击下面的链接马上查看：
+		http://{{ domain }}{% url 'blog_detail' comment.object_pk %}
+
+这是一封来自DannySite的提醒邮件，
+如您不愿意再接收到此邮件，可以点击以下链接取消：
+	http://{{ domain }}{% url 'mail_unsubscribe' %}?sn={{ sn }}&f=rm&m={{ comment.related.user_email }}

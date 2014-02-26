@@ -23,8 +23,8 @@ fs = FileSystemStorage(location=settings.FILESTORE_ROOT,
 
 
 NODE_TYPES = (
-    ('D', '文件夹'),
-    ('F', '文件')
+    ('D', u'文件夹'),
+    ('F', u'文件')
 )
 
 

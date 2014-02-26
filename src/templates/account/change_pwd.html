@@ -3,10 +3,31 @@
 {% load widget_tweaks %}
 
 {% block extra_link %}
-	<link href="{% static 'site/v3/css/login.css' %}" rel="stylesheet" type="text/css">
+	<style>
+		#chg_pwd_box {
+			width: 541px;
+			padding-bottom: 25px;
+		}
+		#chg_pwd_box #chg_pwd_title {
+			padding-top: 15px;
+			padding-bottom: 15px;
+		}
+		.container {
+			position: absolute;
+			top: 50%;
+			margin-top: -274px;
+		}
+		#pwd_reset_info {
+			padding: 15px 0;
+		}
+		#pwd_reset_info span{
+			display: block;
+			padding: 12px 0;
+		}
+	</style>
 {% endblock %}
 
-{% block title %}登录 - DannySite{% endblock %}
+{% block title %}修改密码 - DannySite{% endblock %}
 
 {% block inner_extra_js %}
 	<script>
@@ -22,11 +43,10 @@
 				$('.popupBox').fadeOut('fast');
 			});
 		});
-		
-		$(document).ready(function(e) {
-			var captcha = $('#captcha');
-			var form = $('#login_form');
-			var submit_btn = $('#login_submit');
+		 
+		 $(document).ready(function(){
+		 	var form = $('#chg_pwd_form');
+			var submit_btn = $('#chg_pwd_submit');
 			var submit_status = 0;
 			
 			function form_submit(){
@@ -36,6 +56,7 @@
 				submit_status = 1;
 				$(this).css('background-color', '#eb9300');
 				$(this).text('请稍后...');
+				
 				$.ajax({
 					url: form.attr('action'),
 					type: 'POST',
@@ -44,9 +65,9 @@
 				})
 				.success(function(data){
 					if (data.status){
-						window.location.href = data.redirect;
+						$('.container').html(data.html).css('margin-top', '-200px');
 					} else {
-						errorMsgPopup('登录失败', data.message);
+						errorMsgPopup('设置失败', data.message);
 					}
 				})
 				.error(function(jqXHR, textStatus) {
@@ -54,36 +75,36 @@
 				})
 				.complete(function(jqXHR, textStatus){
 					submit_btn.css('background-color', '#f39800');
-					submit_btn.text('登录');
+					submit_btn.text('提交');
 					submit_status = 0;
 				});
+
 				return false;
 			}
-			
 			submit_btn.bind('click', form_submit);
-		});
+		 });
 	</script>
 {% endblock %}
 
 {% block container %}
-	<div class="normBox bg1" id="login_box">
-    	<div class="top bg2 fs18 textCenter" id="login_title">
-        	<span>登录以继续您的操作</span>
+	<div class="normBox bg1" id="chg_pwd_box">
+    	<div class="top bg2 fs18 textCenter" id="chg_pwd_title">
+        	<span>修改密码</span>
         </div>
-        <form id="login_form" action="{% url 'acct_login' %}" method="post">
+        <form id="chg_pwd_form" action="{% url 'acct_password' %}" method="post">
         	{% csrf_token %}
         	<div class="pt26 textCenter" id="login_form_box">
               	<div class="input_box">
-              		{{ form.email|attr:"class:xnorminput"|attr:"placeholder:账户名" }}
+              		{{ form.password_current|attr:"class:xnorminput"|attr:"placeholder:旧密码" }}
               	</div>
               	<div class="input_box pt16">
-              		{{ form.password|attr:"class:xnorminput"|attr:"placeholder:密码" }}
+              		{{ form.password_new|attr:"class:xnorminput"|attr:"placeholder:新密码" }}
+              	</div>
+              	<div class="input_box pt16">
+              		{{ form.password_new_confirm|attr:"class:xnorminput"|attr:"placeholder:再次输入" }}
               	</div>
                 <div class="input_box pt16">
-                	<button class="cubeBtn" type="submit" id="login_submit">登录</button>
-                </div>
-                <div class="input_box pt16">
-                    <!--<a href="#" class="fs14 normDecorA">忘记密码？</a>-->
+                	<button class="cubeBtn" type="submit" id="chg_pwd_submit">提交</button>
                 </div>
             </div>
         </form>

@@ -1,6 +1,6 @@
 from django.dispatch import Signal
 
-user_signed_up = Signal(providing_args=['user', 'form'])
+user_signed_up = Signal(providing_args=['user'])
 user_sign_up_attempt = Signal(providing_args=['username', 'email', 'result'])
 user_logged_in = Signal(providing_args=['user', 'form'])
 user_login_attempt = Signal(providing_args=['username', 'result'])

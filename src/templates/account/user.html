@@ -1,0 +1,155 @@
+{% load widget_tweaks %}
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>帐户设置 - DannySite</title>
+<link href="{{ STATIC_URL }}dannysite/css/common.css" rel="stylesheet" type="text/css">
+<link href="{{ STATIC_URL }}dannysite/css/user.css" rel="stylesheet" type="text/css">
+<link href="{{ STATIC_URL }}dannysite/css/chosen.css" rel="stylesheet" type="text/css">
+<script src="{{ STATIC_URL }}dannysite/js/common/jquery-1.8.2.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}dannysite/js/common/chosen.jquery.min.js" type="text/javascript"></script>
+<script src="{{ STATIC_URL }}dannysite/js/common/top_nav.js"></script>
+<script src="{{ STATIC_URL }}dannysite/js/common/ajaxfileupload.js"></script>
+<script src="{{ STATIC_URL }}dannysite/js/account/user.js"></script>
+</head>
+
+<body>
+
+<div class="container">
+	<div class="top">
+   		{% include "common_includes/top_nav.html" %}
+    <!-- end .top --></div>
+	<div class="content">
+        <div class="top_in_box">
+        	<div class="title_in_box">
+            	<span>帐户设置</span>
+            </div>
+        </div>
+        <div class="center_in_box">
+        	<div class="left_placeholder_in_box"></div>
+            <div class="content_box">
+            	<form id="form_user_info_manage" method="post" action="{% url 'acct_change_profile' %}">
+            	{% csrf_token %}
+                    <div class="subtitle_in_box">
+                        <span>基本资料</span>
+                    </div>
+                    <div class="content_in_box">
+                      <span class="desc">填写以下资料有助于别人更容易了解您，但所有的内容都不是必须的，您可以随时添加或置空。</span>
+                      <table width="1050" border="0">
+                        <tr>
+                          <td class="input_label">账户名：</td>
+                          <td class="input_content">manyunkai@hotmail.com</td>
+                          <td class="input_label">昵称：</td>
+                          <td class="input_content">{{ profile_form.nickname|attr:"class:input_xlarge"|attr:"placeholder:您的昵称"}}</td>
+                          <td class="input_label">性别：</td>
+                          <td class="input_content">
+                          	{{ profile_form.sex|attr:"class:selectors"|attr:"data-placeholder:性别"}}
+                          </td>
+                        </tr>
+                        <tr>
+                          <td class="input_label">所在地：</td>
+                          <td class="input_content">{{ profile_form.location|attr:"class:input_xlarge"|attr:"placeholder:您的所在地"}}</td>
+                          <td class="input_label">QQ：</td>
+                          <td class="input_content">{{ profile_form.qq|attr:"class:input_xlarge"|attr:"placeholder:您的QQ号码"}}</td>
+                          <td class="input_label">MSN：</td>
+                          <td class="input_content">{{ profile_form.msn|attr:"class:input_xlarge"|attr:"placeholder:您的MSN帐号"}}</td>
+                        </tr>
+                      </table>
+                    </div>
+                    <div class="subtitle_in_box">
+                        <span>个性设置</span>
+                    </div>
+                    <div class="content_in_box">
+                        <div class="placeholder_div"></div>
+                        <div class="personality_left">
+                            <span>个性头像：</span>
+                        </div>
+                        <div class="personality_avatar_div">
+                        	{% if request.user.get_profile.avatar %}
+                        		<img id="avatar" src="/site_media/media/uploads/avatar/small/{{ request.user.get_profile.avatar }}" width="64" height="64">
+                        	{% else %}
+                            	<img id="avatar" src="{{ STATIC_URL }}dannysite/img/common/Default_Avatar.jpg" width="64" height="64">
+                            {% endif %}
+                            {{ profile_form.avatar }}
+                        </div>
+                        <div class="personality_right">
+                            <span id="avatar_info">点击左边头像展示区域可以上传新的头像，<br>
+                                上传后系统会自动剪裁并生成 135x135 以及 64x64 两种大小的头像，<br>
+                                上传方形的图片会获得更完整的效果。</span>
+                        </div>
+                        <div class="clearfloat"></div>
+                        <div class="placeholder_div"></div>
+                        <div class="personality_left">
+                            <span>个性主页：</span>
+                        </div>
+                        <div class="personality_norm">
+                            <span>可以在这里填写您的外链主页的URL，当提交并审核通过后，他人点击您的个人主页当直接跳转到该URL。</span>
+                            <div>
+                            	{{ profile_form.website|attr:"class:input_xlarge"|attr:"placeholder:您的个性主页地址" }}
+                            </div>
+                            <span>· 如果设置该项意味着您将放弃本站提供的主页功能；<br></span>
+                            <span>· 审核通过的条件之一是您的主页中放置了导航到本站的链接。</span>
+                        </div>
+                        <div class="clearfloat"></div>
+                        <div class="placeholder_div"></div>
+                        <div class="personality_left">
+                            <span>个性签名：</span>
+                        </div>
+                        <div class="personality_norm">
+                        	{{ profile_form.signature|attr:"class:input_textareanorm"|attr:"placeholder:您的个性签名" }}
+                        </div>
+                        <div class="clearfloat"></div>
+                    </div>
+                </form>
+                <form id="form_user_pwd_manage" method="post" action="{% url 'acct_change_pwd' %}">
+                {% csrf_token %}
+                    <div class="subtitle_in_box">
+                        <span>密码修改</span>
+                    </div>
+                    <div class="content_in_box">
+                      <span class="desc" id="passwd_set_info">此处可以修改您的帐户密码，如不修改，请置空。</span>
+                      <table width="1050" border="0">
+                        <tr>
+                          <td class="input_label">原密码：</td>
+                          <td class="input_content">{{ passwd_form.old_password|attr:"class:input_xlarge"|attr:"placeholder:原始密码" }}</td>
+                          <td class="input_label">新密码：</td>
+                          <td class="input_content">{{ passwd_form.new_password1|attr:"class:input_xlarge"|attr:"placeholder:新密码" }}</td>
+                          <td class="input_label">重复输入：</td>
+                          <td class="input_content">{{ passwd_form.new_password2|attr:"class:input_xlarge"|attr:"placeholder:重复新密码" }}</td>
+                        </tr>
+                      </table>
+                      <div class="right_placeholder_in_box"></div>
+                      <div class="clearfloat"></div>
+                    </div>
+                </form>
+                <form enctype="multipart/form-data" id="form_avatar_upload" method="post" action="/account/avatar_uploads/">
+                {% csrf_token %}
+                	<input type="file" name="avatar_uploads" id="id_avatar_uploads" style="display:none">
+                </form>
+                <div class="submit_div_in_box">
+                    <div class="submit_btn_div">
+                        <label class="input_label" for="submit" id="submit_info">修改完毕？马上提交：</label>
+                        <input id="submit_btn" class="norm_btn" type="submit" value="提交">
+                    </div>
+                </div>
+            </div>
+            <div class="clearfloat"></div>
+        </div>
+        <div class="bottom_in_box">
+        </div>
+    <!-- end .content --></div>
+    <div class="footer">
+    	<div class="copyright_info_common">
+<img src="{{ STATIC_URL }}dannysite/img/common/Copyright.jpg" alt="Copyright 2007 - 2012 DannyWork, all rights reserved." width="309" height="20">
+        </div>
+    <!-- end .footer --></div>
+<!-- end .container --></div>
+	<script>
+		$(document).ready(function(e) {
+            $('.selectors').chosen();
+        });
+	</script>
+</body>
+</html>

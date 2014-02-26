@@ -21,27 +21,7 @@ from django.conf import settings
 
 
 class UserManager(BaseUserManager):
-
-    def create_user(self, username, email=None, password=None, **extra_fields):
-        now = timezone.now()
-        if not username:
-            raise ValueError('The given username must be set')
-        email = UserManager.normalize_email(email)
-        user = self.model(username=username, email=email,
-                          is_staff=False, is_active=True, is_superuser=False,
-                          last_login=now, date_joined=now, **extra_fields)
-
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-    def create_superuser(self, username, email, password, **extra_fields):
-        u = self.create_user(username, email, password, **extra_fields)
-        u.is_staff = True
-        u.is_active = True
-        u.is_superuser = True
-        u.save(using=self._db)
-        return u
+    pass
 
 
 class PermissionsMixin(models.Model):

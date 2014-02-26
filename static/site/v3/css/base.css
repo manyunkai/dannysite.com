@@ -384,8 +384,8 @@ input {
 input::-webkit-search-decoration, input::-webkit-search-cancel-button {
 	display: none;
 }
-input:focus {
-	border: 2px solid #d6d6d6;
+input[class]:focus {
+	border-color: #d6d6d6;
 }
 button {
 	transition: background-color .15s;
@@ -413,6 +413,10 @@ textarea:focus {
 }
 .cubeBtn:hover {
 	background-color: #eb9300;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
 }
 .placeholder {
 	color: #5e5e5e;

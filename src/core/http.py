@@ -11,7 +11,7 @@ import json
 
 
 class JsonResponse(HttpResponse):
-    def __init__(self, status, msg={}, data={},
+    def __init__(self, status, msg='', data={},
                  content_type='application/json', *args, **kwargs):
         data['status'] = status
         if msg:

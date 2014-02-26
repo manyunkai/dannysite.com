@@ -8,13 +8,13 @@ from django.utils.translation import get_language_from_request, ugettext_lazy as
 from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
 from django.contrib.auth.tokens import default_token_generator
-from django.db import models, IntegrityError
+from django.db import models
 from django.utils import timezone
 from django.db.models.query_utils import Q
 
 from account.utils import random_token
 from account import signals
-from account.signals import signup_code_used
+from account.signals import signup_code_used, user_signed_up, email_confirmed
 from user.models import User
 
 
@@ -165,27 +165,6 @@ class SignupCode(models.Model):
         result.save()
         signup_code_used.send(sender=result.__class__, signup_code_result=result)
 
-#     def send(self, **kwargs):
-#         protocol = getattr(settings, "DEFAULT_HTTP_PROTOCOL", "http")
-#         current_site = kwargs["site"] if "site" in kwargs else Site.objects.get_current()
-#         signup_url = "{0}://{1}{2}?{3}".format(
-#             protocol,
-#             current_site.domain,
-#             reverse("account_signup"),
-#             urllib.urlencode({"code": self.code})
-#         )
-#         ctx = {
-#             "signup_code": self,
-#             "current_site": current_site,
-#             "signup_url": signup_url,
-#         }
-#         subject = render_to_string("account/email/invite_user_subject.txt", ctx)
-#         message = render_to_string("account/email/invite_user.txt", ctx)
-#         send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [self.email])
-#         self.sent = timezone.now()
-#         self.save()
-#         signup_code_sent.send(sender=SignupCode, signup_code=self)
-
 
 class SignupCodeResult(models.Model):
 
@@ -202,70 +181,17 @@ class SignupCodeResult(models.Model):
         self.signup_code.calculate_use_count()
 
 
-# Following code about email.
-class EmailAddressManager(models.Manager):
-    def add_email(self, user, email):
-        try:
-            email_address = self.create_or_get_email(user=user, email=email)
-            return email_address
-        except IntegrityError:
-            return None
-
-    # To replace the self.create(user=user, email=email) method
-    def create_or_get_email(self, user, email):
-        try:
-            emailAddress = EmailAddress.objects.get(user=user, email=email)
-            return emailAddress
-        except EmailAddress.DoesNotExist:
-            return self.create(user=user, email=email)
-
-    def get_primary(self, user):
-        try:
-            return self.get(user=user, primary=True)
-        except EmailAddress.DoesNotExist:
-            return None
-
-    def get_users_for(self, email):
-        """
-        returns a list of users with the given email.
-        """
-        # this is a list rather than a generator because we probably want to
-        # do a len() on it right away
-        return [address.user for address in EmailAddress.objects.filter(
-            verified=True, email=email)]
-
-
 class EmailAddress(models.Model):
     user = models.ForeignKey(User, related_name=u'user', verbose_name=u'用户')
-    email = models.EmailField(u'邮箱')
     verified = models.BooleanField(u'验证状态', default=False)
-    primary = models.BooleanField(u'主邮箱', default=False)
-
-    objects = EmailAddressManager()
 
     def __unicode__(self):
-        return u'%s (%s)' % (self.email, self.user)
-
-    def set_as_primary(self, conditional=False):
-        old_primary = EmailAddress.objects.get_primary(self.user)
-        if old_primary:
-            if conditional:
-                return False
-            old_primary.primary = False
-            old_primary.save()
-        self.primary = True
-        self.save()
-        self.user.email = self.email
-        self.user.save()
-        return True
+        return u'%s (%s)' % (self.user.email, self.user)
 
     class Meta:
         db_table = 'acct_email_address'
         verbose_name = u'邮箱绑定'
         verbose_name_plural = u'邮箱绑定'
-        unique_together = (
-            ('user', 'email'),
-        )
 
 
 class EmailConfirmationManager(models.Manager):
@@ -282,7 +208,7 @@ class EmailConfirmationManager(models.Manager):
 class EmailConfirmation(models.Model):
     email_address = models.ForeignKey(EmailAddress)
     created = models.DateTimeField(default=timezone.now())
-    sent = models.DateTimeField(auto_now_add=True)
+    sent = models.DateTimeField(auto_now_add=True)  # 临时修改为创建时间
     confirmation_key = models.CharField(max_length=64)
 
     objects = EmailConfirmationManager()
@@ -297,13 +223,14 @@ class EmailConfirmation(models.Model):
 
     @classmethod
     def create(cls, email_address):
-        key = random_token([email_address.email])
+        email = email_address.user.email
+        key = random_token([email])
 
         cls._default_manager.filter(email_address=email_address).delete()
         obj = cls._default_manager.create(email_address=email_address,
-                                          confirmation_key=key)
+                                                                      confirmation_key=key)
 
-        cls._default_manager.save_presend_email(obj, email_address.email)
+        cls._default_manager.save_presend_email(obj, email)
 
         return obj
 
@@ -313,10 +240,32 @@ class EmailConfirmation(models.Model):
     key_expired.boolean = True
 
     def confirm(self):
-        if not self.key_expired() and not self.email_address.verified:
+        if self.key_expired():
+            return False
+        if not self.email_address.verified:
             email_address = self.email_address
             email_address.verified = True
-            email_address.set_as_primary(conditional=True)
             email_address.save()
             signals.email_confirmed.send(sender=self.__class__, email_address=email_address)
-            return email_address
+        return True
+
+
+def handle_signup(sender=None, **kwargs):
+    created_user = kwargs.get('user')
+    email_address = EmailAddress.objects.get_or_create(user=created_user)[0]
+    if settings.ACCOUNT_EMAIL_CONFIRMATION_REQUIRED and not email_address.verified:
+            created_user.is_active = False
+            created_user.save()
+    else:
+            created_user.create_profile()
+
+    EmailConfirmation.create(email_address)
+
+
+def handle_email_confirmed(sender=None, **kwargs):
+    user = kwargs.get('email_address').user
+    user.activate()
+    user.create_profile()
+
+user_signed_up.connect(handle_signup)
+email_confirmed.connect(handle_email_confirmed)
