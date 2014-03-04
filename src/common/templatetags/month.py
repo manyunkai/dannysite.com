@@ -7,12 +7,13 @@ Copyright (C) 2012-2014 DannyWork Project
 '''
 
 from django import template
+from django.utils import timezone
 
 register = template.Library()
 
 
 @register.tag
 def get_month(value):
-    return value.strftime('%b')
+    return timezone.localtime(value).strftime('%b')
 
 register.filter('month', get_month)
