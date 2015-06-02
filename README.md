@@ -1,7 +1,7 @@
 DannySite
 =========
 
-Source code to dannysite.com
+Source code to dannysite.com(ver 3.0)
 
 Visit my website at http://www.dannysite.com/
 
