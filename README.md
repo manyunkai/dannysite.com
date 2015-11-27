@@ -5,6 +5,8 @@ Source code to dannysite.com(ver 3.0)
 
 Visit my website at http://www.dannysite.com/
 
+##### 推荐前往 dannysite4 工程查看最新版本代码。
+
 
 ### 介绍
 
